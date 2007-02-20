@@ -98,7 +98,7 @@ function changeNoa(param) {
 	var len = fc.length
 	for(var i=0;i<len;i++) {
 		if(fc[i].nodeName=="data") {
-			var info = utf8to16(fc[i].getAttribute("information"));
+			var info = fc[i].getAttribute("information");
 			var lar = utf8to16(fc[i].getAttribute("cd_url")).split("?noa=");
 			cdloc = lar[0];
 			//query = utf8to16(lar[1]).replace(/%20/g,"+");
