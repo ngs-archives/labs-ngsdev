@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+
+  <IfModule mod_dir.c>
+    DirectoryIndex inout.php index.html index.htm default.htm default.html default.asp /inout/auth/inout.php
+  </IfModule>
+
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+
+  RewriteRule ^(.*)$ /inout/auth/inout.php [L,QSA]
+</IfModule>
