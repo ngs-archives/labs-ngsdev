@@ -3,7 +3,7 @@
 :::
 :::
 :::
-:::	 Now On Air for Dashboard 1.0 :::
+:::	 Now On Air for Dashboard 1.1.1 :::
 :::
 :::	 code + design ::: atsushi nagase ::: http://ngsdev.org/
 :::
@@ -22,7 +22,8 @@ var interval;
 var flip
 var flip2
 var interval_array = [0,0.1,0.5,1,1.5,2,5,10];
-var reloadButton
+var reloadButton;
+var _backmode = false;
 function setup() {
 	flip2 = new Flip("flip2","fliprollie2");
 	flip = new Flip("flip","fliprollie");
@@ -117,7 +118,7 @@ function showStatus(param) {
 	statusDiv.innerHTML = param;
 }
 function getCD() {
-	if(!flip.isOver()&&!flip2.isOver()) {
+	if(!flip.isOver()&&!flip2.isOver()&&!_backmode) {
 		if (window.widget) {
 			widget.openURL(cdloc+"?noa="+query);
 		} else {
@@ -175,6 +176,7 @@ http://developer.apple.com/ja/documentation/AppleApplications/Conceptual/Dashboa
 ------------------------------------------------------------------------*/
 function showBack()
 {
+	_backmode = true;
 	attachSelect();
 	var front = document.getElementById("front");
 	var back = document.getElementById("back");
@@ -190,6 +192,7 @@ function showBack()
 
 function hideBack()
 {
+	_backmode = false;
 	flip.out(event);
 	flip2.out(event);
 	removeSelect();
