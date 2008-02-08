@@ -99,9 +99,8 @@ function changeNoa(param) {
 	for(var i=0;i<len;i++) {
 		if(fc[i].nodeName=="data") {
 			var info = fc[i].getAttribute("information");
-			var lar = utf8to16(fc[i].getAttribute("cd_url")).split("?noa=");
+			var lar = fc[i].getAttribute("cd_url").split("?noa=");
 			cdloc = lar[0];
-			//query = utf8to16(lar[1]).replace(/%20/g,"+");
 			var info_ar = info.split("」")
 			song = info_ar[0].split("「").join('');
 			artist = info_ar[1]
