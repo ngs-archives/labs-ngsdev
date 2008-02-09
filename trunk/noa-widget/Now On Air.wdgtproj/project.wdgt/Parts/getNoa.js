@@ -6,6 +6,7 @@
 :::	 Now On Air for Dashboard 1.1.1 :::
 :::
 :::	 code + design ::: atsushi nagase ::: http://ngsdev.org/
+:::	 Copyright 2005-2008 atsushi nagase. All rights  reserved.
 :::
 :::
 :::
@@ -25,12 +26,15 @@ var interval_array = [0,0.1,0.5,1,1.5,2,5,10];
 var reloadButton;
 var _backmode = false;
 function setup() {
+    if (setup.called) return;
+    setup.called = true;
+    CreateGlassButton('doneButton', { text: '完了' });
 	flip2 = new Flip("flip2","fliprollie2");
 	flip = new Flip("flip","fliprollie");
 	if (window.widget) {
 		widget.onhide = onhide;
 		widget.onshow = onshow;
-		interval = widget.preferenceForKey("interval");
+		interval = parseInt(widget.preferenceForKey("interval"));
 	}
 	if(isNaN(interval)) changeInterval(1);
 	getNoa();
@@ -44,7 +48,6 @@ function onshow() {
 function activeInterval() {
 	removeInterval()
 	if(interval) interval_engine = setInterval("getNoa();", interval);
-	//alert(interval_engine)
 }
 
 function showFlips() {
@@ -68,9 +71,7 @@ function onhide() {
 }
 
 function getNoa() {
-	//alert("loading")
 	noaDiv = document.getElementById("noa");
-	//showStatus("読み込み中");
 	flip2.setOpacity(100)
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -80,8 +81,6 @@ function getNoa() {
 			if(xhttp.responseText) {
 				showStatus();
 				changeNoa(xhttp.responseXML);
-			}else{
-				//showStatus("読み込み失敗");
 			}
 		}
 	}
@@ -91,8 +90,7 @@ function getNoa() {
 	xhttp.open('GET',fname,true)
 	xhttp.send(null);
 }
-var song
-var artist
+var song, artist;
 function changeNoa(param) {
 	var fc = param.firstChild.childNodes
 	var len = fc.length
@@ -135,14 +133,14 @@ function changeInterval(t) {
 		t = 0;
 		removeInterval()
 	}
-	interval = t
-	//alert(t)
+	interval = t;
 	if(window.widget) widget.setPreferenceForKey(t,"interval");
 }
 
 function attachSelect() {
 	var sel = document.getElementById("selectInterval");
-	var len = interval_array.length
+	var len = interval_array.length;
+	if(window.widget) interval = parseInt(widget.preferenceForKey("interval"));
 	for(var i=0; i<len; i++) {
 		var opt = document.createElement("option");
 		opt.value = i.toString();
@@ -189,6 +187,7 @@ function showBack()
 function hideBack()
 {
 	_backmode = false;
+	changeInterval(document.getElementById("selectInterval").value);
 	flip.out(event);
 	flip2.out(event);
 	removeSelect();
@@ -203,3 +202,6 @@ function hideBack()
 
 
 /*------------------------------------------------------------------------*/
+
+window.addEventListener('load', setup, false);
+window.addEventListener('mousedown', getCD, false);
