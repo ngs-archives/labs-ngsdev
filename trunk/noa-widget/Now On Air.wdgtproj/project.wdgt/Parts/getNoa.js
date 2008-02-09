@@ -33,7 +33,6 @@ function setup() {
 		interval = widget.preferenceForKey("interval");
 	}
 	if(isNaN(interval)) changeInterval(1);
-	createGenericButton(document.getElementById('doneButton'), "DONE", hideBack);
 	getNoa();
 }
 
@@ -180,12 +179,9 @@ function showBack()
 	attachSelect();
 	var front = document.getElementById("front");
 	var back = document.getElementById("back");
-		
 	if (window.widget) widget.prepareForTransition("ToBack");
-				
 	front.style.display="none";
 	back.style.display="block";
-		
 	if (window.widget) setTimeout ('widget.performTransition();', 0);  
 }
 
@@ -199,12 +195,9 @@ function hideBack()
 	activeInterval()
 	var front = document.getElementById("front");
 	var back = document.getElementById("back");
-
 	if (window.widget) widget.prepareForTransition("ToFront");
-
 	back.style.display="none";
 	front.style.display="block";
-
 	if (window.widget) setTimeout ('widget.performTransition();', 0);
 }
 
