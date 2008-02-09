@@ -43,16 +43,6 @@ select#selectInterval {
     top: 3px;
     left: 140px;
 }
-
-#doneButton {
-/*	width:54px;
-	height:24px;
-	text-indent:-999px;
-	overflow:hidden;
-	background-repeat:no-repeat;
-	background-image:url(../donebutton.png);
-	background-position:center center;*/
-}
 /*</group>*/
 /*</group>*/
 
@@ -209,10 +199,11 @@ body {
 }
 
 /*</group>*/
-#glassbutton {
+#doneButton {
     position: absolute;
     z-index: 8101;
     width: 45px;
     top: 5px;
     left: 235px;
+	cursor: pointer;
 }
