@@ -1,0 +1,10 @@
+#scrollArea {
+    position: absolute;
+    color: black;
+    font-family: HelveticaNeue;
+    font-size: 10pt;
+    left: 0px;
+    top: 0px;
+    width: 319px;
+    height: 86px;
+}
