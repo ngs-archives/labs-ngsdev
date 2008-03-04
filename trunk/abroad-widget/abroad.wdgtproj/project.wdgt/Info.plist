@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowFileAccessOutsideOfWidget</key>
+	<true/>
 	<key>AllowNetworkAccess</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
@@ -18,11 +20,11 @@
 	<integer>5</integer>
 	<key>CloseBoxInsetY</key>
 	<integer>5</integer>
+	<key>Height</key>
+	<integer>312</integer>
 	<key>MainHTML</key>
 	<string>abroad.html</string>
-	<key>Height</key>
-	<integer>96</integer>
 	<key>Width</key>
-	<integer>320</integer>
+	<integer>412</integer>
 </dict>
 </plist>

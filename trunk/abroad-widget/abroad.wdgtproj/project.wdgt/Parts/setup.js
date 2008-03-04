@@ -4,5 +4,6 @@ function setupParts() {
     if (setupParts.called) return;
     setupParts.called = true;
     CreateScrollArea('scrollArea', { hasVerticalScrollbar: true, scrollbarDivSize: 18, autoHideScrollbars: true, scrollbarMargin: 6, spacing: 4 });
+    CreatePopupButton('popup', { options: unescape('[%27項目 1%27%2C %27項目 2%27%2C %27項目 3%27]'), rightImageWidth: 16, leftImageWidth: 5 });
 }
 window.addEventListener('load', setupParts, false);

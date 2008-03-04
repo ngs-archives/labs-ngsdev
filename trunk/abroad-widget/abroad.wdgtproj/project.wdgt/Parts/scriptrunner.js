@@ -15,9 +15,7 @@ var ScriptRunner = function(entries) {
     function loadScript(src) {
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        //ab orignal
-        script.charset = 'Shift_JIS';
-        //
+        script.charset = 'utf-8';
         script.src = src;
         (document.body || document.documentElement).appendChild(script);
     }
