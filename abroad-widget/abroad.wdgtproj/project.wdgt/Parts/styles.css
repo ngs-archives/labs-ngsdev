@@ -1,0 +1,41 @@
+body { font-size:80%; font-family: "Lucida Grande", "Verdana", "Meiryo", "Hiragino Kaku Gothic Pro W3", "ヒラギノ角ゴPro W3", "HiraKakuPro-W3", "MS Pゴシック", Sans-Serif; }
+em { font-style:normal; }
+.dummy { height:1px; width:100%; clear:both; overflow:hidden; visibility:hidden; }
+.dummy hr { margin:0; height:1px; }
+
+div#front { position:relative; top:0; left:0; }
+div#back { display:none; }
+
+div#frame { width:412px; height:312px; background:url(img/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
+div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:auto; background:#f7f8e8; display:none; }
+
+body div#search { display:block; }
+body.loading div#loading,
+body.complete div#results,
+body.error div#error { display:block; }
+body.error div#search,
+body.loading div#search,
+body.complete div#search { display:none; }
+
+div#frame  div.navi  { display:none; }
+body.complete div#frame  div.navi { display:block; }
+div#frame  div.navi { position:absolute; left:5px; width:402px; }
+div#frame  div.navi p { margin:0; }
+div#frame  div#navi-top { top:16px; }
+div#frame  div#navi-top p.search { float:right; }
+div#frame  div#navi-bottom { top:277px; color:#fff; }
+div#frame  div#navi-bottom p.hitnum { float:left; padding:2px 5px; font-size:85%; }
+div#frame  div#navi-bottom p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
+div#frame  div#navi-bottom p.current { float:right; }
+div#frame  div#navi-bottom ul.page { float:right; margin:0; padding:0; list-style:none; }
+div#frame  div#navi-bottom ul.page li { float:left; margin:0; padding:0; }
+
+div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(img/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; }
+div#results div#content div.cassette h2 { margin:0; width:100%; font-size:110%; }
+div#results div#content div.cassette h2 a { display:block; color:#666; padding:8px; text-decoration:none; line-height:150%; }
+div#results div#content div.cassette div.info { background:url(img/cas-bottom.png) no-repeat 0 0; padding:0 0 5px 0; }
+div#results div#content div.cassette div.info p { margin:0; }
+div#results div#content div.cassette div.info p.cities { color:#258ea4; padding:5px; }
+div#results div#content div.cassette div.info p.round { float:left; color:#fff; font-size:85%; padding:1px 0 2px 0; }
+div#results div#content div.cassette div.info p.term { background:url(img/cas-term.png) no-repeat 5px 0; text-indent:7px; width:45px; }
+div#results div#content div.cassette div.info p.price { float:left; color:#fff; background:url(img/cas-price.png) no-repeat 100% 0; padding:1px 2px 2px 2px; }
