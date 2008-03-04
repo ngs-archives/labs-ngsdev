@@ -1,4 +1,4 @@
-body { font-size:80%; font-family: "Lucida Grande", "Verdana", "Meiryo", "Hiragino Kaku Gothic Pro W3", "ヒラギノ角ゴPro W3", "HiraKakuPro-W3", "MS Pゴシック", Sans-Serif; }
+body { font-size:80%; font-family: "Lucida Grande", "Verdana", "Meiryo", "Hiragino Kaku Gothic Pro W3", "ヒラギノ角ゴPro W3", "HiraKakuPro-W3", "MS Pゴシック", Sans-Serif; margin:0; }
 em { font-style:normal; }
 .dummy { height:1px; width:100%; clear:both; overflow:hidden; visibility:hidden; }
 .dummy hr { margin:0; height:1px; }
