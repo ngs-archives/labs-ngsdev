@@ -1,52 +1,101 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><!--
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::
-:::
-:::
-:::     AB-ROAD for Dashboard 1.0 :::
-:::
-:::     code + design ::: atsushi nagase ::: http://ngsdev.org/
-:::
-:::
-:::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
---><head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" id="abroad-widget">
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta name="generator" content="Dashcode">
 	<link rev="made" title="atsushi nagase" href="http://ngsdev.org/">
-	<link rel="stylesheet" type="text/css" media="all" href="abroad.css">
-	<title>AB-ROAD</title>
-	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollbar.js" charset="utf-8"></script>
-	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
-	<script type="text/javascript" src="Parts/ScrollArea.js" charset="utf-8"></script>
-	<script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
-	<script type="text/javascript" src="Parts/setup.js" charset="utf-8"></script>
-<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
-<script type="text/javascript" src="Parts/PopupButton.js" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="Parts/styles.css">
+	<script type="text/javascript" src="Parts/jquery.js"></script>
+	<script type="text/javascript" src="Parts/jquery.form.js"></script>
+	<script type="text/javascript" src="Parts/recruit.ui.js"></script>
+	<script type="text/javascript" src="Parts/abroad.ui.js"></script>
+	<script type="text/javascript" src="Parts/scriptrunner.js"></script>
+	<script type="text/javascript" src="Parts/abroad.js"></script>
+	<title>AB-ROAD widget</title>
 </head>
 <body>
 <div id="front">
-	<div apple-part="com.apple.Dashcode.part.scrollarea" class="apple-scrollarea" id="scrollArea" apple-group="scrollArea">
-		
-		
-	<div id="content" class="content" apple-group="scrollArea" style="position: absolute; left: 0px; top: 0px; right: 22px; bottom: 0px; overflow-x: hidden; overflow-y: hidden; ">
-			aaa<br>
-			aaa<br>
-			aaa<br>
-			aaa<br>
-			aaa<br>
-			aaa<br>
+	<!-- frame ==================================== -->
+	<div id="frame">
+		<div class="navi" id="navi-top">
+			<p class="search"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
+		</div>
+		<div class="navi" id="navi-bottom">
+			<p class="hitnum"><em></em>件見つかりました</p>
+			<ul class="page">
+				<li class="prev rui-page-back"><a href="#loading">前</a></li>
+				<li class="next rui-page-next"><a href="#loading">次</a></li>
+			</ul>
+			<p class="current"><span class="c"></span>/全<span class="t"></span>ページ</p>
 		</div>
 	</div>
-<div apple-part="com.apple.Dashcode.part.roundedpopupbutton" class="apple-no-children" apple-style="image-theme: 0; image-shape: 3; image-button-type: 1; image-opacity: 1.00; image-top-color: 0.6700,0.6700,0.6700; image-bottom-color: 0.6700,0.6700,0.6700; image-radius: 5,5,5,5; image-border-color: 0.6700,0.6700,0.6700; shine-on: 1; shine-strength: 0.44; shine-height: 0.50; shadow-include-shadow: 0; shadow-blur: 3.00;" id="popup" apple-group="popup"></div>
+	<!-- results ==================================== -->
+	<div id="results" apple-part="com.apple.Dashcode.part.scrollarea" class="content">
+		<div id="content">
+			<div id="cassette-template" class="cassette">
+				<h2><a href="#cassette-template" title="__title__">__title__</a></h2>
+				<div class="info">
+					<p class="cities">__city_summary__</p>
+					<p class="term round"><em>__term__</em>日間</p>
+					<p class="price round">
+						<span class="min"><em>__price_min__</em>万</span>
+						<span class="glue">〜</span>
+						<span class="max"><em>__price_max__</em>万</span>
+						<span class="unit">円</span>
+					</p>
+					<div class="dummy"><hr /></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- loading ==================================== -->
+	<div id="loading" class="content">
+		<p class="message">読み込み中</p>
+	</div>
+	<!-- error ==================================== -->
+	<div id="error" class="content">
+		<p class="message"></p>
+		<p class="back"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
+	</div>
+	<!-- search ==================================== -->
+	<div id="search" class="content">
+		<form id="search-form">
+			<fieldset class="dept">
+				<legend><label for="ab-dept-sel">出発</label></legend>
+				<select id="ab-dept-sel" name="dept"></select>
+				<select id="ab-month-sel" name="ym"></select>
+			</fieldset>
+			<fieldset class="destination">
+				<legend><label for="ab-area-sel">目的地</label></legend>
+				<select id="ab-area-sel" name="area"></select>
+				<select id="ab-country-sel" name="country"></select>
+				<select id="ab-city-sel" name="city"></select>
+			</fieldset>
+			<fieldset class="term two">
+				<legend><label for="ab-term-min-sel">期間</label></legend>
+				<select id="ab-term-min-sel" name="term_min"></select>
+				<span class="spl"> ～</span>
+				<select id="ab-term-max-sel" name="term_max"></select>
+			</fieldset>
+			<fieldset class="pricec two">
+				<legend><label for="ab-price-min-sel">価格</label></legend>
+				<select id="ab-price-min-sel" name="price_min"></select>
+				<span class="spl"> ～</span>
+				<select id="ab-price-max-sel" name="price_max"></select>
+			</fieldset>
+			<fieldset class="order">
+				<legend><label for="ab-order-sel">並び順</label></legend>
+				<select id="ab-order-sel" name="order"></select>
+				<input type="hidden" name="count" value="10" />
+			</fieldset>
+			<p class="submit"><a href="#search-form" rel="submit">検索</a></p>
+		</form>
+	</div>
 </div>
 <div id="back">
+	back
 </div>
-
 </body>
 </html>
