@@ -11,14 +11,10 @@ div#back { display:none; }
 div#frame { width:412px; height:312px; background:url(Images/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
 div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:auto; background:#f7f8e8; display:none; }
 
-body div#search { display:block; }
+body.search div#search,
 body.loading div#loading,
 body.complete div#results,
 body.error div#error { display:block; }
-body.error div#search,
-body.loading div#search,
-body.complete div#search { display:none; }
-
 
 body.complete div#frame div#navi-top p.hitnum,
 body.complete div#frame div#navi-bottom div#page-navi,
@@ -59,6 +55,9 @@ div#results div#content div.cassette div.info p.cities { color:#258ea4; padding:
 div#results div#content div.cassette div.info p.round { float:left; color:#fff; font-size:85%; padding:2px 0 4px 0; white-space:nowrap; }
 div#results div#content div.cassette div.info p.term { background:url(Images/cas-term.png) no-repeat 5px 0; text-indent:10px; width:45px; }
 div#results div#content div.cassette div.info p.price { float:left; color:#fff; background:url(Images/cas-price.png) no-repeat 100% 0; padding:2px 6px 4px 4px; }
+
+div#results.overflow div#content div.cassette { width:368px; background-image:url(Images/cas-top2.png) }
+div#results.overflow div#content div.cassette div.info { background-image:url(Images/cas-bottom2.png) }
 
 div#search { overflow:hidden; }
 div#search form { margin:0; padding:3px; }

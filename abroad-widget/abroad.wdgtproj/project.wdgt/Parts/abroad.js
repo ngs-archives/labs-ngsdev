@@ -3,6 +3,7 @@ Recruit.UI.key = 'a450fa593ee3f2a4';
 var ABROADWidget = {
 	results : false,
 	templates : {},
+	elements : {},
 	init : function() {
 		$.each(["Dept","Places","Month","Term","Price","Order"],function(){
 			new ABROAD.UI[this].Pulldown();
@@ -17,6 +18,12 @@ var ABROADWidget = {
 		$("form#search-form").submit(function(){
 			ABROADWidget.search(); return false;
 		});
+		if(window.widget) {
+			this.elements.scrollbar = CreateScrollArea('results', { hasVerticalScrollbar: true, scrollbarDivSize: 18, autoHideScrollbars: true, scrollbarMargin: 6, spacing: 4 });
+			//CreatePopupButton('popup', { options: unescape('[%27項目 1%27%2C %27項目 2%27%2C %27項目 3%27]'), rightImageWidth: 16, leftImageWidth: 5 });
+		} else {
+			$("body").addClass("browser");
+		}
 		//
 		$("div#page-navi p.current span.c").html("<#cp>");
 		$("div#page-navi p.current span.t").html("<#lp>");
@@ -121,8 +128,8 @@ var ABROADWidget = {
 			if (window.widget) widget.openURL(h);
 			else window.open(h);
 			return false;
-		})
-		//$("div#content").css("top",0);
+		});
+		if(this.elements.scrollbar) this.elements.scrollbar.refresh();
 		return true;
 	}
 }
