@@ -1,12 +1,14 @@
 body { font-size:80%; font-family: "Lucida Grande", "Verdana", "Meiryo", "Hiragino Kaku Gothic Pro W3", "ヒラギノ角ゴPro W3", "HiraKakuPro-W3", "MS Pゴシック", Sans-Serif; margin:0; }
 em { font-style:normal; }
+fieldset { border:0; margin:0; padding:0; }
+legend { margin:0; padding:0; display:inline; float:left; }
 .dummy { height:1px; width:100%; clear:both; overflow:hidden; visibility:hidden; }
 .dummy hr { margin:0; height:1px; }
 
 div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
 
-div#frame { width:412px; height:312px; background:url(img/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
+div#frame { width:412px; height:312px; background:url(Images/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
 div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:auto; background:#f7f8e8; display:none; }
 
 body div#search { display:block; }
@@ -17,25 +19,68 @@ body.error div#search,
 body.loading div#search,
 body.complete div#search { display:none; }
 
-div#frame  div.navi  { display:none; }
-body.complete div#frame  div.navi { display:block; }
-div#frame  div.navi { position:absolute; left:5px; width:402px; }
-div#frame  div.navi p { margin:0; }
-div#frame  div#navi-top { top:16px; }
-div#frame  div#navi-top p.search { float:right; }
-div#frame  div#navi-bottom { top:277px; color:#fff; }
-div#frame  div#navi-bottom p.hitnum { float:left; padding:2px 5px; font-size:85%; }
-div#frame  div#navi-bottom p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
-div#frame  div#navi-bottom p.current { float:right; }
-div#frame  div#navi-bottom ul.page { float:right; margin:0; padding:0; list-style:none; }
-div#frame  div#navi-bottom ul.page li { float:left; margin:0; padding:0; }
 
-div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(img/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; }
+body.complete div#frame div#navi-top p.hitnum,
+body.complete div#frame div#navi-bottom div#page-navi,
+body.complete div#frame div#navi-bottom p#search-button,
+body.search div#frame div#navi-bottom p#submit-button { display:block; }
+
+div#frame div.navi { position:absolute; left:5px; width:402px; }
+div#frame div.navi p { margin:0; }
+div#frame div#navi-top { top:16px; }
+div#frame div#navi-top p.hitnum { float:right; padding:2px 8px 2px 5px; font-size:100%; color:#fff; display:none; }
+div#frame div#navi-top p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
+div#frame div#navi-bottom p.search { float:left; }
+div#frame div#navi-bottom { top:277px; color:#fff; }
+div#frame div#navi-bottom div#page-navi { float:right; display:none; }
+div#frame div#navi-bottom div#page-navi p.current { float:left; font-size:85%; padding:7px 10px 0 0; }
+div#frame div#navi-bottom div#page-navi ul.page { float:left; margin:0; padding:3px 0 0 0; list-style:none; width:69px; }
+div#frame div#navi-bottom div#page-navi ul.page li { float:left; margin:0; padding:0 2px 0 0; }
+div#frame div#navi-bottom div#page-navi ul.page li a { display:block; width:30px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; }
+div#frame div#navi-bottom div#page-navi ul.page li a:hover { background-position:0 -21px; }
+div#frame div#navi-bottom div#page-navi ul.page li a:active { background-position:0 -42px; }
+div#frame div#navi-bottom div#page-navi ul.page li.next { float:right; padding-right:7px; }
+div#frame div#navi-bottom div#page-navi ul.page li.next a { background-image:url(Images/navi-next.png); }
+div#frame div#navi-bottom div#page-navi ul.page li.prev a { background-image:url(Images/navi-prev.png); }
+div#frame div#navi-bottom p.button { display:none; float:left; padding:3px 0 0 7px; }
+div#frame div#navi-bottom p.button a { display:block; float:left; width:42px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; }
+div#frame div#navi-bottom p.button a:hover { background-position:0 -21px; }
+div#frame div#navi-bottom p.button a:active { background-position:0 -42px; }
+div#frame div#navi-bottom p#search-button a { background-image:url(Images/navi-search.png); }
+div#frame div#navi-bottom p#submit-button a { background-image:url(Images/navi-submit.png); }
+
+div#results div#content { padding:2px 0 2px 2px; }
+div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; }
 div#results div#content div.cassette h2 { margin:0; width:100%; font-size:110%; }
 div#results div#content div.cassette h2 a { display:block; color:#666; padding:8px; text-decoration:none; line-height:150%; }
-div#results div#content div.cassette div.info { background:url(img/cas-bottom.png) no-repeat 0 0; padding:0 0 5px 0; }
+div#results div#content div.cassette div.info { background:url(Images/cas-bottom.png) no-repeat 0 0; padding:0 0 5px 0; }
 div#results div#content div.cassette div.info p { margin:0; }
 div#results div#content div.cassette div.info p.cities { color:#258ea4; padding:5px; }
-div#results div#content div.cassette div.info p.round { float:left; color:#fff; font-size:85%; padding:1px 0 2px 0; }
-div#results div#content div.cassette div.info p.term { background:url(img/cas-term.png) no-repeat 5px 0; text-indent:7px; width:45px; }
-div#results div#content div.cassette div.info p.price { float:left; color:#fff; background:url(img/cas-price.png) no-repeat 100% 0; padding:1px 2px 2px 2px; }
+div#results div#content div.cassette div.info p.round { float:left; color:#fff; font-size:85%; padding:2px 0 4px 0; white-space:nowrap; }
+div#results div#content div.cassette div.info p.term { background:url(Images/cas-term.png) no-repeat 5px 0; text-indent:10px; width:45px; }
+div#results div#content div.cassette div.info p.price { float:left; color:#fff; background:url(Images/cas-price.png) no-repeat 100% 0; padding:2px 6px 4px 4px; }
+
+div#search { overflow:hidden; }
+div#search form { margin:0; padding:3px; }
+div#search h2 { margin:0; padding:7px; font-size:100%; color:#666; }
+div#search fieldset { width:100%; float:left; background:url(Images/form-fieldset.png) no-repeat 0 0; height:38px; }
+div#search fieldset label { display:block; float:left; font-size:110%; font-weight:bold; color:#333; }
+div#search fieldset legend label { width:66px; padding:13px 0 0 0; text-indent:13px; }
+div#search fieldset input,
+div#search fieldset select,
+div#search fieldset span.spl { position:relative; top:8px; left:8px; display:block; float:left; }
+div#search fieldset span.spl { padding:5px; }
+div#search fieldset p { margin:0; }
+div#search fieldset p.ele { width:318px; background:url(Images/form-input.png) no-repeat 0 2px; height:36px; float:left; }
+div#search fieldset.dept { margin-bottom:-1px; }
+div#search fieldset.dept p { float:left; width:192px; background:url(Images/form-input.png) no-repeat 66px 2px; height:36px; }
+div#search fieldset.dept p label { padding:13px 0 0 0; text-indent:13px; width:66px; }
+div#search fieldset.dept p select { width:110px; }
+div#search fieldset.destination { margin-bottom:3px; }
+div#search fieldset.destination p select { width:97px; margin:0 8px 0 0; }
+div#search fieldset.term { margin-bottom:-1px; }
+div#search fieldset.price { margin-bottom:3px; }
+div#search fieldset.two select { width:100px; }
+div#search fieldset.keyword legend label { width:85px; }
+div#search fieldset.keyword p.ele { width:299px; }
+div#search fieldset.keyword p.ele input { width:250px; }
