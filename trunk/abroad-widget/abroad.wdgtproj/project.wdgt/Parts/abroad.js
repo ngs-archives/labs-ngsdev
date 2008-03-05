@@ -13,17 +13,17 @@ var ABROADWidget = {
 		$("a[@rel='set-status']").click(function(){
 			ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false;
 		});
+		$("input[@type='text']").click(function(){ this.select(); })
 		$("form#search-form").submit(function(){
 			ABROADWidget.search(); return false;
 		});
 		//
-		$("div#navi-bottom p.hitnum em").html("<#te>");
-		$("div#navi-bottom p.current span.c").html("<#cp>");
-		$("div#navi-bottom p.current span.t").html("<#lp>");
-		this.templates.page = $("div#navi-bottom").html().replace(/\t|\n/g,"").replace(/&gt;/g,">").replace(/&lt;/g,"<");
+		$("div#page-navi p.current span.c").html("<#cp>");
+		$("div#page-navi p.current span.t").html("<#lp>");
+		this.templates.page = $("div#page-navi").html().replace(/\t|\n/g,"").replace(/&gt;/g,">").replace(/&lt;/g,"<");
 		this.templates.cassette = $("#cassette-template").html().replace(/\t|\n/g,"");
 		$("#cassette-template").remove();
-		$("div#navi-bottom").empty();
+		$("div#page-navi").empty();
 		this.setStatus("search");
 	},
 	error : function(msg) {
@@ -36,7 +36,8 @@ var ABROADWidget = {
 		start = start ? start : 1;
 		var url = "http:\/\/webservice.recruit.co.jp\/ab-road\/tour\/v1\/?" + 
 		"key=" + Recruit.UI.key + "&format=jsonp&callback=ABROADWidget.onLoadResults&" +
-		"start=" + start + "&" + $( 'form#search-form' ).formSerialize();
+		"start=" + start + "&" + $( 'form#search-form' ).formSerialize()+
+		"&rnd="+Math.ceil(Math.random()*10000000).toString();
 		ScriptRunner([{"ABROADWidget.results":url}]);
 		this.setStatus("loading");
 	},
@@ -58,12 +59,15 @@ var ABROADWidget = {
 		else if(!this.appendCassettes(r.tour)) return false;
 		//
 		var page = new Recruit.UI.Page.Simple(d);
+		$("div#navi-top p.hitnum em").html(page.data_page._total_entries);
 		page.paginate({
-			id : "navi-bottom",
+			id : "page-navi",
 			request: function(i) { ABROADWidget.search(i); },
 			template : this.templates.page
 		});
 		this.setStatus("complete");
+		if($("div#content").height()>$("div#results").height()) $("div#results").addClass("overflow");
+		else $("div#results").removeClass("overflow");
 		return true;
 	},
 	appendCassettes : function(tours) {
