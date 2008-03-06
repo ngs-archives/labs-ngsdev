@@ -131,13 +131,13 @@ var ABROADWidget = {
 			if(this.price.min==this.price.max) $("p.price span.min,p.price span.glue",cas).remove();
 			cassettes.append(cas);
 		});
+		$("div#content").append(cassettes);
 		$("div#cassettes div.cassette").click(function(){
 			var h = $("h2 a",this).attr("href");
 			if (window.widget) widget.openURL(h);
 			else window.open(h);
 			return false;
 		});
-		$("div#content").append(cassettes);
 		return true;
 	}
 }
