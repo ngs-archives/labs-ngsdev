@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowFileAccessOutsideOfWidget</key>
+	<true/>
+	<key>AllowNetworkAccess</key>
+	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>abroad</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.ngsdev.widget.abroad</string>
+	<key>CFBundleName</key>
+	<string>abroad</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CloseBoxInsetX</key>
+	<integer>5</integer>
+	<key>CloseBoxInsetY</key>
+	<integer>5</integer>
+	<key>Height</key>
+	<integer>312</integer>
+	<key>MainHTML</key>
+	<string>abroad.html</string>
+	<key>Width</key>
+	<integer>412</integer>
+</dict>
+</plist>
