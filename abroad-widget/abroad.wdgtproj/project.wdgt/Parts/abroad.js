@@ -5,31 +5,17 @@ var ABROADWidget = {
 	templates : {},
 	elements : {},
 	init : function() {
-		$.each(["Dept","Places","Month","Term","Price","Order"],function(){
-			new ABROAD.UI[this].Pulldown();
-		});
-		$("a[@rel='submit']").click(function(){
-			$("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false;
-		});
-		$("a[@rel='external']").click(function(){
-			var h = $(this).attr("href");
-			if (window.widget) widget.openURL(h);
-			else window.open(h);
-			return false;
-		});
-		$("a[@rel='set-status']").click(function(){
-			ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false;
-		});
+		$.each(["Dept","Places","Month","Term","Price","Order"],function(){ new ABROAD.UI[this].Pulldown(); });
+		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
+		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
+		$("a[@rel='set-status']").click(function(){ ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false; });
 		$("input[@type='text']").click(function(){ this.select(); })
-		$("form#search-form").submit(function(){
-			ABROADWidget.search(); return false;
-		});
+		$("form#search-form").submit(function(){ ABROADWidget.search(); return false; });
+		$("div#error").click(function(){ ABROADWidget.setStatus("search"); });
 		if(window.widget) {
 			this.elements.scrollbar = CreateScrollArea('results', { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
 			//CreatePopupButton('popup', { options: unescape('[%27項目 1%27%2C %27項目 2%27%2C %27項目 3%27]'), rightImageWidth: 16, leftImageWidth: 5 });
-		} else {
-			$("body").addClass("browser");
-		}
+		} else $("body").addClass("browser");
 		//
 		$("div#page-navi p.current span.c").html("<#cp>");
 		$("div#page-navi p.current span.t").html("<#lp>");
@@ -51,6 +37,7 @@ var ABROADWidget = {
 		"key=" + Recruit.UI.key + "&format=jsonp&callback=ABROADWidget.onLoadResults&" +
 		"start=" + start + "&" + $( 'form#search-form' ).formSerialize()+
 		"&rnd="+Math.ceil(Math.random()*10000000).toString();
+		delete this.results;
 		ScriptRunner([{"ABROADWidget.results":url}]);
 		this.setStatus("loading");
 	},
@@ -63,6 +50,23 @@ var ABROADWidget = {
 				bool = true;
 			}
 		}) ;
+		switch(i) {
+			case "loading":
+			case "error":
+				$("div#"+i+" p.message").css("opacity","0.0");
+				$("div#"+i+" p.message").fadeIn();
+				break;
+			case "search":
+				$("div#results").addClass("hidden");
+				$("div#search").removeClass("hidden");
+				break;
+			case "complete":
+				$("div#results").removeClass("hidden");
+				$("div#search").addClass("hidden");
+				break;
+				
+		}
+		
 		return bool;
 	},
 	onLoadResults : function(d) {
@@ -133,12 +137,14 @@ var ABROADWidget = {
 		});
 		$("div#content").append(cassettes);
 		$("div#cassettes div.cassette").click(function(){
-			var h = $("h2 a",this).attr("href");
+			return ABROADWidget.getURL($("h2 a",this).attr("href"));
+		});
+		return true;
+	},
+	getURL : function(h) {
 			if (window.widget) widget.openURL(h);
 			else window.open(h);
 			return false;
-		});
-		return true;
 	}
 }
 
