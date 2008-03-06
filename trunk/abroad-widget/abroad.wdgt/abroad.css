@@ -4,18 +4,25 @@ fieldset { border:0; margin:0; padding:0; }
 legend { margin:0; padding:0; display:inline; float:left; }
 .dummy { height:1px; width:100%; clear:both; overflow:hidden; visibility:hidden; }
 .dummy hr { margin:0; height:1px; }
+.hidden { display:none; }
 
 div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
 
-div#frame { width:412px; height:312px; background:url(Images/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
-div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:hidden; background:#f7f8e8; display:none; }
+div#frame { width:412px; height:312px; background:url(Default.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
+div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; overflow:hidden; }
 body.browser div#results { overflow:auto; }
 
-body.search div#search,
+div#results {  z-index:102; }
+div#search {  z-index:103; }
+div#loading { z-index:201; display:none; }
+div#error { z-index:202; display:none; }
+
+body.search div#results,
+body.complete div#search { display:none; }
+
 body.loading div#loading,
-body.complete div#results,
-body.error div#error { display:block; }
+body.error div#error { display:block;  background-image:url(Images/overlay.png); }
 
 body.complete div#frame div#navi-top p.hitnum,
 body.complete div#frame div#navi-bottom div#page-navi,
@@ -35,21 +42,21 @@ div#frame div#navi-bottom div#page-navi { float:right; display:none; }
 div#frame div#navi-bottom div#page-navi p.current { float:left; font-size:85%; padding:7px 10px 0 0; }
 div#frame div#navi-bottom div#page-navi ul.page { float:left; margin:0; padding:3px 0 0 0; list-style:none; width:69px; }
 div#frame div#navi-bottom div#page-navi ul.page li { float:left; margin:0; padding:0 2px 0 0; }
-div#frame div#navi-bottom div#page-navi ul.page li a { display:block; width:30px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; }
+div#frame div#navi-bottom div#page-navi ul.page li a { display:block; width:30px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; -apple-dashboard-region:dashboard-region(control rectangle); }
 div#frame div#navi-bottom div#page-navi ul.page li a:hover { background-position:0 -21px; }
 div#frame div#navi-bottom div#page-navi ul.page li a:active { background-position:0 -42px; }
 div#frame div#navi-bottom div#page-navi ul.page li.next { float:right; padding-right:7px; }
 div#frame div#navi-bottom div#page-navi ul.page li.next a { background-image:url(Images/navi-next.png); }
 div#frame div#navi-bottom div#page-navi ul.page li.prev a { background-image:url(Images/navi-prev.png); }
 div#frame div#navi-bottom p.button { display:none; float:left; padding:3px 0 0 7px; }
-div#frame div#navi-bottom p.button a { display:block; float:left; width:42px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; }
+div#frame div#navi-bottom p.button a { display:block; float:left; width:42px; height:21px; background:none no-repeat 0 0; text-indent:-9999px; overflow:hidden; -apple-dashboard-region:dashboard-region(control rectangle); }
 div#frame div#navi-bottom p.button a:hover { background-position:0 -21px; }
 div#frame div#navi-bottom p.button a:active { background-position:0 -42px; }
 div#frame div#navi-bottom p#search-button a { background-image:url(Images/navi-search.png); }
 div#frame div#navi-bottom p#submit-button a { background-image:url(Images/navi-submit.png); }
 
 div#results div#content { padding:2px 0 2px 2px; }
-div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; }
+div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; -apple-dashboard-region:dashboard-region(control rectangle); }
 div#results div#content div.cassette h2 { margin:0; width:100%; font-size:110%; }
 div#results div#content div.cassette h2 a { display:block; color:#666; padding:8px; text-decoration:none; line-height:150%; }
 div#results div#content div.cassette div.info { background:url(Images/cas-bottom.png) no-repeat 0 0; padding:0 0 5px 0; }
@@ -62,11 +69,10 @@ div#results div#content div.cassette div.info p.price { float:left; color:#fff; 
 div#results.overflow div#content div.cassette { width:370px; background-image:url(Images/cas-top2.png) }
 div#results.overflow div#content div.cassette div.info { background-image:url(Images/cas-bottom2.png) }
 
-div#search { overflow:hidden; }
 div#search form { margin:0; padding:3px; }
 div#search h2 { margin:0; padding:7px; font-size:100%; color:#666; }
 div#search fieldset { width:100%; float:left; background:url(Images/form-fieldset.png) no-repeat 0 0; height:38px; }
-div#search fieldset label { display:block; float:left; font-size:110%; font-weight:bold; color:#333; }
+div#search fieldset label { display:block; float:left; font-size:110%; font-weight:bold; color:#595959; }
 div#search fieldset legend label { width:66px; padding:13px 0 0 0; text-indent:13px; }
 div#search fieldset input,
 div#search fieldset select,
@@ -87,4 +93,8 @@ div#search fieldset.keyword legend label { width:85px; }
 div#search fieldset.keyword p.ele { width:299px; }
 div#search fieldset.keyword p.ele input { width:250px; }
 
-div#loading p.message { margin:0; padding:10px 0; text-indent:34px; background:url(Images/loading.gif) no-repeat 0 50%; font-size:110%; color:#999; position:absolute; top:40%; left:35%; }
+div#loading p.message { background:url(Images/loading.png) no-repeat 0 0; margin:0; padding:0; width:190px; height:60px; position:absolute; top:84px; left:101px }
+div#loading p.message em { font-size:1px; text-indent:-9999px; background:url(Images/loading.gif) no-repeat 50% 50%; height:60px; width:60px; display:block; }
+
+div#error p.message { background:url(Images/error.png) no-repeat 0 0; margin:0; padding:0; width:190px; height:110px; position:absolute; top:59px; left:101px; }
+div#error p.message em { color:#fff; display:block; text-align:center; padding:80px 10px 0 10px; }
