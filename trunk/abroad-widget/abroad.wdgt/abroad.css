@@ -59,7 +59,7 @@ div#results div#content div.cassette div.info p.round { float:left; color:#fff; 
 div#results div#content div.cassette div.info p.term { background:url(Images/cas-term.png) no-repeat 5px 0; text-indent:10px; width:45px; }
 div#results div#content div.cassette div.info p.price { float:left; color:#fff; background:url(Images/cas-price.png) no-repeat 100% 0; padding:2px 6px 4px 4px; }
 
-div#results.overflow div#content div.cassette { width:368px; background-image:url(Images/cas-top2.png) }
+div#results.overflow div#content div.cassette { width:370px; background-image:url(Images/cas-top2.png) }
 div#results.overflow div#content div.cassette div.info { background-image:url(Images/cas-bottom2.png) }
 
 div#search { overflow:hidden; }
