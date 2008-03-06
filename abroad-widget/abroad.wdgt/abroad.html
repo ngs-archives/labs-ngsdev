@@ -20,31 +20,43 @@
 	<script type="text/javascript" src="Parts/abroad.js" charset="utf-8"></script>
 	<title>AB-ROAD widget</title>
 </head>
-<body class="browser search">
+<body>
 <div id="front">
 	<!-- frame ==================================== -->
 	<div id="frame">
 		<div class="navi" id="navi-top">
-			<p class="powered">
-			    <a href="http://www.ab-road.net/" rel="external" title="Powered by AB-ROAD">Powered by AB-ROAD</a>
-			</p>
-			<p class="hitnum">
-			    <em></em>ツアーが見つかりました</p>
+			<p class="powered"><a href="http://www.ab-road.net/" rel="external" title="Powered by AB-ROAD">Powered by AB-ROAD</a></p>
+			<p class="hitnum"><em></em>ツアーが見つかりました</p>
 		</div>
 		<div class="navi" id="navi-bottom">
-			<p class="search button" id="search-button">
-			    <a href="#search" rel="set-status" title="再検索">再検索</a>
-			</p>
-			<p class="submit button" id="submit-button">
-			    <a href="#search-form" rel="submit">検索</a>
-			</p>
-			<div id="page-navi"></div>
+			<p class="search button" id="search-button"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
+			<p class="submit button" id="submit-button"><a href="#search-form" rel="submit">検索</a></p>
+			<div id="page-navi">
+				<p class="current"><span class="c"></span>/全<span class="t"></span>ページ</p>
+				<ul class="page">
+					<li class="prev rui-page-back"><a href="#loading">前</a></li>
+					<li class="next rui-page-next"><a href="#loading">次</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<!-- results ==================================== -->
-	<div id="results" class="content">
-		<div id="content">
-			
+	<div id="results" apple-part="com.apple.Dashcode.part.scrollarea" apple-group="searchSesult" class="content">
+		<div id="content" apple-group="searchSesult">
+			<div id="cassette-template" class="cassette">
+				<h2><a href="#cassette-template" title="__title__">__title__</a></h2>
+				<div class="info">
+					<p class="cities">__city_summary__</p>
+					<p class="term round"><em>__term__</em>日間</p>
+					<p class="price round">
+						<span class="min"><em>__price_min__</em>万</span>
+						<span class="glue">&#65374;</span>
+						<span class="max"><em>__price_max__</em>万</span>
+						<span class="unit">円</span>
+					</p>
+					<div class="dummy"><hr /></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- loading ==================================== -->
@@ -54,9 +66,7 @@
 	<!-- error ==================================== -->
 	<div id="error" class="content">
 		<p class="message"></p>
-		<p class="back">
-		    <a href="#search" rel="set-status" title="再検索">再検索</a>
-		</p>
+		<p class="back"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
 	</div>
 	<!-- search ==================================== -->
 	<div id="search" class="content">
@@ -65,142 +75,42 @@
 			<fieldset class="dept">
 				<p class="dept">
 					<label for="ab-dept-sel">出発地</label>
-					<select id="ab-dept-sel" name="dept">
-					    <option value="">指定なし</option>
-					<option value="TYO">東京</option>
-					<option value="NGO">名古屋</option>
-					<option value="OSA">大阪</option>
-					<option value="FUK">福岡</option>
-					<option value="999">その他</option>
-					</select>
+					<select id="ab-dept-sel" name="dept"></select>
 				</p>
 				<p class="month">
 					<label for="ab-month-sel">出発月</label>
-					<select id="ab-month-sel" name="ym">
-					    <option value="">指定なし</option>
-					<option value="200803">2008年03月</option>
-					<option value="200804">2008年04月</option>
-					<option value="200805">2008年05月</option>
-					<option value="200806">2008年06月</option>
-					<option value="200807">2008年07月</option>
-					<option value="200808">2008年08月</option>
-					<option value="200809">2008年09月</option>
-					<option value="200810">2008年10月</option>
-					<option value="200811">2008年11月</option>
-					<option value="200812">2008年12月</option>
-					<option value="200901">2009年01月</option>
-					<option value="200902">2009年02月</option>
-					</select>
+					<select id="ab-month-sel" name="ym"></select>
 				</p>
 			</fieldset>
 			<fieldset class="destination">
-				<legend>
-				    <label for="ab-area-sel">目的地</label>
-				</legend>
+				<legend><label for="ab-area-sel">目的地</label></legend>
 				<p class="ele">
-					<select id="ab-area-sel" name="area">
-					    <option value="">指定なし</option>
-					<option value="AAS">アジア</option>
-					<option value="BCH">ビーチリゾート</option>
-					<option value="CAF">アフリカ・他</option>
-					<option value="DUS">アメリカ</option>
-					<option value="EUR">ヨーロッパ</option>
-					<option value="FOC">オセアニア</option>
-					<option value="HWI">ハワイ</option>
-					</select>
-					<select id="ab-country-sel" name="country">
-					    <option value="">指定なし</option>
-					</select>
-					<select id="ab-city-sel" name="city">
-					    <option value="">指定なし</option>
-					</select>
+					<select id="ab-area-sel" name="area"></select>
+					<select id="ab-country-sel" name="country"></select>
+					<select id="ab-city-sel" name="city"></select>
 				</p>
 			</fieldset>
 			<fieldset class="term two">
-				<legend>
-				    <label for="ab-term-min-sel">期　間</label>
-				</legend>
+				<legend><label for="ab-term-min-sel">期　間</label></legend>
 				<p class="ele">
-					<select id="ab-term-min-sel" name="term_min">
-					    <option value="">指定なし</option>
-					<option value="2">2日以上</option>
-					<option value="3">3日以上</option>
-					<option value="4">4日以上</option>
-					<option value="5">5日以上</option>
-					<option value="6">6日以上</option>
-					<option value="7">7日以上</option>
-					<option value="8">8日以上</option>
-					<option value="9">9日以上</option>
-					<option value="10">10日以上</option>
-					</select>
-					<span class="spl">～</span>
-					<select id="ab-term-max-sel" name="term_max">
-					    <option value="">指定なし</option>
-					<option value="2">2日以内</option>
-					<option value="3">3日以内</option>
-					<option value="4">4日以内</option>
-					<option value="5">5日以内</option>
-					<option value="6">6日以内</option>
-					<option value="7">7日以内</option>
-					<option value="8">8日以内</option>
-					<option value="9">9日以内</option>
-					<option value="10">10日以内</option>
-					</select>
+					<select id="ab-term-min-sel" name="term_min"></select>
+					<span class="spl">&#65374;</span>
+					<select id="ab-term-max-sel" name="term_max"></select>
 				</p>
 			</fieldset>
 			<fieldset class="price two">
-				<legend>
-				    <label for="ab-price-min-sel">価　格</label>
-				</legend>
+				<legend><label for="ab-price-min-sel">価　格</label></legend>
 				<p class="ele">
-					<select id="ab-price-min-sel" name="price_min">
-					    <option value="">指定なし</option>
-					<option value="30000">3万円以上</option>
-					<option value="40000">4万円以上</option>
-					<option value="50000">5万円以上</option>
-					<option value="60000">6万円以上</option>
-					<option value="70000">7万円以上</option>
-					<option value="80000">8万円以上</option>
-					<option value="90000">9万円以上</option>
-					<option value="100000">10万円以上</option>
-					<option value="150000">15万円以上</option>
-					<option value="200000">20万円以上</option>
-					<option value="250000">25万円以上</option>
-					<option value="300000">30万円以上</option>
-					<option value="350000">35万円以上</option>
-					<option value="400000">40万円以上</option>
-					<option value="450000">45万円以上</option>
-					</select>
-					<span class="spl">～</span>
-					<select id="ab-price-max-sel" name="price_max">
-					    <option value="">指定なし</option>
-					<option value="30000">3万円以内</option>
-					<option value="40000">4万円以内</option>
-					<option value="50000">5万円以内</option>
-					<option value="60000">6万円以内</option>
-					<option value="70000">7万円以内</option>
-					<option value="80000">8万円以内</option>
-					<option value="90000">9万円以内</option>
-					<option value="100000">10万円以内</option>
-					<option value="150000">15万円以内</option>
-					<option value="200000">20万円以内</option>
-					<option value="250000">25万円以内</option>
-					<option value="300000">30万円以内</option>
-					<option value="350000">35万円以内</option>
-					<option value="400000">40万円以内</option>
-					<option value="450000">45万円以内</option>
-					</select>
+					<select id="ab-price-min-sel" name="price_min"></select>
+					<span class="spl">&#65374;</span>
+					<select id="ab-price-max-sel" name="price_max"></select>
 				</p>
 			</fieldset>
 			<fieldset class="keyword">
-				<legend>
-				    <label for="ab-keyword-ipt">キーワード</label>
-				</legend>
-				<p class="ele">
-				    <input type="text" name="keyword" id="ab-keyword-ipt">
-				</p>
+				<legend><label for="ab-keyword-ipt">キーワード</label></legend>
+				<p class="ele"><input type="text" name="keyword" id="ab-keyword-ipt" /></p>
 			</fieldset>
-			<input type="hidden" name="count" value="10">
+			<input type="hidden" name="count" value="10" />
 		</form>
 	</div>
 </div>
