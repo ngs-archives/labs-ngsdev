@@ -1,4 +1,4 @@
-Recruit.UI.key = 'a450fa593ee3f2a4';
+Recruit.UI.key = 'ef4393b09d77dbc2';
 
 var ABROADWidget = {
 	results : false,
@@ -10,6 +10,12 @@ var ABROADWidget = {
 		});
 		$("a[@rel='submit']").click(function(){
 			$("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false;
+		});
+		$("a[@rel='external']").click(function(){
+			var h = $(this).attr("href");
+			if (window.widget) widget.openURL(h);
+			else window.open(h);
+			return false;
 		});
 		$("a[@rel='set-status']").click(function(){
 			ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false;
