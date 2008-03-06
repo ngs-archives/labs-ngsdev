@@ -53,8 +53,9 @@ var ABROADWidget = {
 		switch(i) {
 			case "loading":
 			case "error":
-				$("div#"+i+" p.message").css("opacity","0.0");
-				$("div#"+i+" p.message").fadeIn();
+				$("div#"+i).css("opacity","0.0");
+				$("div#"+i).animate({opacity:1},"fast");
+				setTimeout(function(){ $("div#search input[@type='text'],div#search select").attr("disable","disable"); },99);
 				break;
 			case "search":
 				$("div#results").addClass("hidden");
