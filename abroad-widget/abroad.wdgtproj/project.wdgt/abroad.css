@@ -9,7 +9,8 @@ div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
 
 div#frame { width:412px; height:312px; background:url(Images/frame.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
-div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:auto; background:#f7f8e8; display:none; }
+div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; z-index:102; overflow:hidden; background:#f7f8e8; display:none; }
+body.browser div#results { overflow:auto; }
 
 body.search div#search,
 body.loading div#loading,
@@ -24,6 +25,8 @@ body.search div#frame div#navi-bottom p#submit-button { display:block; }
 div#frame div.navi { position:absolute; left:5px; width:402px; }
 div#frame div.navi p { margin:0; }
 div#frame div#navi-top { top:16px; }
+div#frame div#navi-top p.powered { float:left; padding:0 0 0 10px; }
+div#frame div#navi-top p.powered a { width:95px; height:25px; float:left; display:block; text-indent:-9999px; overflow:hidden; }
 div#frame div#navi-top p.hitnum { float:right; padding:2px 8px 2px 5px; font-size:100%; color:#fff; display:none; }
 div#frame div#navi-top p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
 div#frame div#navi-bottom p.search { float:left; }
@@ -83,3 +86,5 @@ div#search fieldset.two select { width:100px; }
 div#search fieldset.keyword legend label { width:85px; }
 div#search fieldset.keyword p.ele { width:299px; }
 div#search fieldset.keyword p.ele input { width:250px; }
+
+div#loading p.message { margin:0; padding:10px 0; text-indent:34px; background:url(Images/loading.gif) no-repeat 0 50%; font-size:110%; color:#999; position:absolute; top:40%; left:35%; }
