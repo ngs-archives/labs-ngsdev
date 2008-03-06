@@ -42,8 +42,10 @@ var ABROADWidget = {
 		this.setStatus("loading");
 	},
 	setStatus : function(i) {
-		var bool = false;
-		$.each(["complete","error","loading","search"],function(){
+		var bool = false, reverse = false;
+		if(i=="back"&&!$("body.back").size()) reverse = "ToBack";
+		else if(i!="back"&&$("body.back").size()) reverse = "ToFront";
+		$.each(["complete","error","loading","search","back"],function(){
 			if(this!=i) $("body").removeClass(this);
 			else {
 				$("body").addClass(this);
@@ -55,7 +57,6 @@ var ABROADWidget = {
 			case "error":
 				$("div#"+i).css("opacity","0.0");
 				$("div#"+i).animate({opacity:1},"fast");
-				setTimeout(function(){ $("div#search input[@type='text'],div#search select").attr("disable","disable"); },99);
 				break;
 			case "search":
 				$("div#results").addClass("hidden");
@@ -67,7 +68,7 @@ var ABROADWidget = {
 				break;
 				
 		}
-		
+		if(window.widget&&reverse) widget.prepareForTransition(reverse);
 		return bool;
 	},
 	onLoadResults : function(d) {
