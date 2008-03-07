@@ -9,8 +9,8 @@ legend { margin:0; padding:0; display:inline; float:left; }
 div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
 
-div#frame { width:412px; height:312px; background:url(Default.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
-div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; overflow:hidden; }
+div#frame { width:434px; height:330px; background:url(Default.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
+div.content { width:392px; height:228px; position:absolute; top:50px; left:21px; overflow:hidden; }
 body.browser div#results { overflow:auto; }
 
 div#results {  z-index:102; }
@@ -30,7 +30,7 @@ body.complete div#frame div#navi-bottom p#search-button,
 body.search div#frame div#navi-bottom p#submit-button,
 body.search div#frame div#navi-bottom p#reset-button { display:block; }
 
-div#frame div.navi { position:absolute; left:5px; width:402px; }
+div#frame div.navi { position:absolute; left:15px; width:402px; }
 div#frame div.navi p { margin:0; }
 div#frame div#navi-top { top:16px; }
 div#frame div#navi-top p.powered { float:left; padding:0 0 0 10px; }
@@ -38,7 +38,7 @@ div#frame div#navi-top p.powered a { width:95px; height:25px; float:left; displa
 div#frame div#navi-top p.hitnum { float:right; padding:2px 8px 2px 5px; font-size:100%; color:#fff; display:none; }
 div#frame div#navi-top p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
 div#frame div#navi-bottom p.search { float:left; }
-div#frame div#navi-bottom { top:277px; color:#fff; }
+div#frame div#navi-bottom { top:279px; color:#fff; }
 div#frame div#navi-bottom div#page-navi { float:right; display:none; }
 div#frame div#navi-bottom div#page-navi p.current { float:left; font-size:85%; padding:7px 10px 0 0; }
 div#frame div#navi-bottom div#page-navi ul.page { float:left; margin:0; padding:3px 0 0 0; list-style:none; width:69px; }
