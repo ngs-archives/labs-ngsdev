@@ -21,9 +21,17 @@ var ABROADWidget = {
 			});
 			opts = "["+opts.join(",")+"]";
 			$("select#ab-order-sel").remove();
-			this.elements.sortorder = CreatePopupButton("sort-order-popup", { options: opts, rightImageWidth: 16, leftImageWidth: 7 });
-			$(this.elements.sortorder.select).change(function(){
-				ABROADWidget.changeSort($(this).val());
+			this.elements.sortorder = CreatePopupButton("sort-order-popup", {
+				options: opts, rightImageWidth: 16, leftImageWidth: 7
+			});
+			$(this.elements.sortorder.select).change(function(e){ ABROADWidget.changeSort($(this).val()); });
+			this.elements.infobutton = CreateInfoButton('info-button', {
+				onclick : function(){ ABROADWidget.setStatus("back"); },
+				foregroundStyle: 'white', frontID: 'front', backgroundStyle: 'white'
+			});
+			this.elements.donebutton = CreateGlassButton("done-button", {
+				onclick: function(){ ABROADWidget.setStatus("front"); },
+				text: "OK"
 			});
 		} else $("body").addClass("browser");
 		//
@@ -54,7 +62,10 @@ var ABROADWidget = {
 	setStatus : function(i) {
 		var bool = false, reverse = false;
 		if(i=="back"&&!$("body.back").size()) reverse = "ToBack";
-		else if(i!="back"&&$("body.back").size()) reverse = "ToFront";
+		else if(i!="back"&&$("body.back").size()) {
+			reverse = "ToFront";
+			i = this._status;
+		}
 		if(window.widget&&reverse) widget.prepareForTransition(reverse);
 		$.each(["complete","error","loading","search","back"],function(){
 			if(this!=i) $("body").removeClass(this);
@@ -68,18 +79,22 @@ var ABROADWidget = {
 			case "error":
 				$("div#"+i).css("opacity","0.0");
 				$("div#"+i).animate({opacity:1},"fast");
+				$("p#info-button").addClass("hidden");
 				break;
 			case "search":
 				$("div#results").addClass("hidden");
 				$("div#search").removeClass("hidden");
+				$("p#info-button").removeClass("hidden");
 				break;
 			case "complete":
 				$("div#results").removeClass("hidden");
 				$("div#search").addClass("hidden");
+				$("p#info-button").removeClass("hidden");
 				break;
 				
 		}
 		if(window.widget&&reverse) setTimeout ("widget.performTransition();", 0);
+		if(bool&&i!="back") this._status = i;
 		return bool;
 	},
 	onLoadResults : function(d) {

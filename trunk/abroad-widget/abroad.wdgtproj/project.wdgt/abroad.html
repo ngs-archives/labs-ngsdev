@@ -7,12 +7,16 @@
 	<meta name="generator" content="Dashcode">
 	<link rev="made" title="atsushi nagase" href="http://ngsdev.org/">
 	<link rel="stylesheet" type="text/css" media="all" href="abroad.css">
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleAnimator.js" charset="utf-8"></script>
 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollbar.js" charset="utf-8"></script> 
 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
     <script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/ScrollArea.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/PopupButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/InfoButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/GlassButton.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/jquery.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/jquery.form.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/recruit.ui.js" charset="utf-8"></script>
@@ -28,6 +32,7 @@
 		<div class="navi" id="navi-top">
 			<p class="powered"><a href="http://www.ab-road.net/" rel="external" title="Powered by AB-ROAD">Powered by AB-ROAD</a></p>
 			<p class="hitnum"><em></em>ツアーが見つかりました</p>
+			<p class="apple-no-children" id="info-button" apple-part="com.apple.Dashcode.part.infobutton" apple-default-image-visibility="hidden"></p>
 		</div>
 		<div class="navi" id="navi-bottom">
 			<p class="search button" id="search-button"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
@@ -121,7 +126,15 @@
 	</div>
 </div>
 <div id="back">
-	back
+	<p id="done-button" class="apple-no-children" apple-part="com.apple.Dashcode.part.glassbutton"></p>
+	<address id="credits">
+		<p>Powered by <em><a href="http://www.ab-road.net/" rel="external">AB-ROAD</a></em>.</p>
+		<p>Using libraries
+			<em><a href="http://mtl.recruit.co.jp/sandbox/rui/" rel="external">Recruit WebService UI Library</a></em>,
+			<em><a href="http://jquery.com/" rel="external">jQuery</a></em>
+		.</p>
+		<p>&copy;+code+design 2008 <em><a href="http://ngsdev.org/" rel="external">atsushi nagase</a></em>.</p>
+	</address>
 </div>
 </body>
 </html>
