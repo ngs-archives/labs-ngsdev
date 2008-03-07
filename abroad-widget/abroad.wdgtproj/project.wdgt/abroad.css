@@ -29,6 +29,7 @@ body.complete div#frame div#navi-bottom div#page-navi,
 body.complete div#frame div#navi-bottom p#search-button,
 body.search div#frame div#navi-bottom p#submit-button { display:block; }
 
+
 div#frame div.navi { position:absolute; left:5px; width:402px; }
 div#frame div.navi p { margin:0; }
 div#frame div#navi-top { top:16px; }
@@ -54,6 +55,10 @@ div#frame div#navi-bottom p.button a:hover { background-position:0 -21px; }
 div#frame div#navi-bottom p.button a:active { background-position:0 -42px; }
 div#frame div#navi-bottom p#search-button a { background-image:url(Images/navi-search.png); }
 div#frame div#navi-bottom p#submit-button a { background-image:url(Images/navi-submit.png); }
+div#frame div#navi-bottom div#sort-order-popup { text-align: left; width:110px; float:left; position:relative; top:2px; let:2px; }
+body.search div#frame div#navi-bottom div#sort-order-popup,
+body.loading div#frame div#navi-bottom div#sort-order-popup,
+body.error div#frame div#navi-bottom div#sort-order-popup { display:none; }
 
 div#results div#content { padding:2px 0 2px 2px; }
 div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; -apple-dashboard-region:dashboard-region(control rectangle); }
