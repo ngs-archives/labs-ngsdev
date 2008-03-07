@@ -7,7 +7,7 @@
 	<key>AllowNetworkAccess</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
-	<string>エイビーロード ツアー検索</string>
+	<string>AB-ROAD</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.ngsdev.widget.abroad</string>
 	<key>CFBundleName</key>
