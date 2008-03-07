@@ -57,7 +57,7 @@ div#frame div#navi-bottom p#search-button a { background-image:url(Images/navi-s
 div#frame div#navi-bottom p#submit-button a { background-image:url(Images/navi-submit.png); }
 div#frame div#navi-bottom p#reset-button { padding-left:3px; }
 div#frame div#navi-bottom p#reset-button a { background-image:url(Images/navi-reset.png); width:63px; }
-div#frame div#navi-bottom div#sort-order-popup { text-align: left; width:110px; height:19px; float:left; position:relative; top:2px; left:2px; }
+div#frame div#navi-bottom div#sort-order-popup { text-align: left; width:115px; height:19px; float:left; position:relative; top:3px; left:3px; font-weight:bold; }
 body.search div#frame div#navi-bottom div#sort-order-popup,
 body.loading div#frame div#navi-bottom div#sort-order-popup,
 body.error div#frame div#navi-bottom div#sort-order-popup { display:none; }

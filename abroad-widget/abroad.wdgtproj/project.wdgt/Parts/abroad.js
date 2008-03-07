@@ -21,7 +21,10 @@ var ABROADWidget = {
 			});
 			opts = "["+opts.join(",")+"]";
 			$("select#ab-order-sel").remove();
-			this.elements.sortorder = CreatePopupButton("sort-order-popup", { onchange: 'ABROAD.changeSort', options: opts, rightImageWidth: 16, leftImageWidth: 7 });
+			this.elements.sortorder = CreatePopupButton("sort-order-popup", { options: opts, rightImageWidth: 16, leftImageWidth: 7 });
+			$(this.elements.sortorder.select).change(function(){
+				ABROADWidget.changeSort($(this).val());
+			});
 		} else $("body").addClass("browser");
 		//
 		$("div#page-navi p.current span.c").html("<#cp>");
@@ -155,6 +158,13 @@ var ABROADWidget = {
 			if (window.widget) widget.openURL(h);
 			else window.open(h);
 			return false;
+	},
+	changeSort : function(h) {
+		var ipt = $("form#search-form input[@name='order']");
+		if(ipt.val()==h) return false;
+		ipt.val(h);
+		this.search();
+		return false;
 	}
 }
 
