@@ -45,6 +45,7 @@ var ABROADWidget = {
 		var bool = false, reverse = false;
 		if(i=="back"&&!$("body.back").size()) reverse = "ToBack";
 		else if(i!="back"&&$("body.back").size()) reverse = "ToFront";
+		if(window.widget&&reverse) widget.prepareForTransition(reverse);
 		$.each(["complete","error","loading","search","back"],function(){
 			if(this!=i) $("body").removeClass(this);
 			else {
@@ -68,7 +69,7 @@ var ABROADWidget = {
 				break;
 				
 		}
-		if(window.widget&&reverse) widget.prepareForTransition(reverse);
+		if(window.widget&&reverse) setTimeout ("widget.performTransition();", 0);
 		return bool;
 	},
 	onLoadResults : function(d) {
