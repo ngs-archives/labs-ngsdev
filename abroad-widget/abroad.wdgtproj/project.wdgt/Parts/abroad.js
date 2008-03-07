@@ -7,6 +7,7 @@ var ABROADWidget = {
 	init : function() {
 		$.each(["Dept","Places","Month","Term","Price","Order"],function(){ new ABROAD.UI[this].Pulldown(); });
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
+		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
 		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
 		$("a[@rel='set-status']").click(function(){ ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false; });
 		$("input[@type='text']").click(function(){ this.select(); })
@@ -20,7 +21,7 @@ var ABROADWidget = {
 			});
 			opts = "["+opts.join(",")+"]";
 			$("select#ab-order-sel").remove();
-			this.elements.sortorder = CreatePopupButton("sort-order-popup", { onchange: 'ABROAD.changeSort', options: opts, rightImageWidth: 16, leftImageWidth: 10 });
+			this.elements.sortorder = CreatePopupButton("sort-order-popup", { onchange: 'ABROAD.changeSort', options: opts, rightImageWidth: 16, leftImageWidth: 7 });
 		} else $("body").addClass("browser");
 		//
 		$("div#page-navi p.current span.c").html("<#cp>");
