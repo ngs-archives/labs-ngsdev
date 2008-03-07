@@ -9,7 +9,8 @@
 	<link rel="stylesheet" type="text/css" media="all" href="abroad.css">
 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollbar.js" charset="utf-8"></script> 
 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
-	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>  
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/ScrollArea.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/PopupButton.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Parts/jquery.js" charset="utf-8"></script>
@@ -31,6 +32,8 @@
 		<div class="navi" id="navi-bottom">
 			<p class="search button" id="search-button"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
 			<p class="submit button" id="submit-button"><a href="#search-form" rel="submit">検索</a></p>
+			<p class="reset button" id="submit-button"><a href="#search-form" rel="reset">リセット</a></p>
+			<div id="sort-order-popup" apple-group="sort-order-popup" apple-part="com.apple.Dashcode.part.lozengepopupbutton"></div>
 			<div id="page-navi">
 				<p class="current"><span class="c"></span>/全<span class="t"></span>ページ</p>
 				<ul class="page">
@@ -109,7 +112,10 @@
 				<legend><label for="ab-keyword-ipt">キーワード</label></legend>
 				<p class="ele"><input type="text" name="keyword" id="ab-keyword-ipt" /></p>
 			</fieldset>
-			<input type="hidden" name="count" value="10" />
+			<fieldset class="hidden">
+				<select id="ab-order-sel"></select>
+				<input type="hidden" name="count" value="10" />
+			</fieldset>
 		</form>
 	</div>
 </div>
