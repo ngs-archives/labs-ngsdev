@@ -14,6 +14,13 @@ var ABROADWidget = {
 		$("form#search-form").submit(function(){ ABROADWidget.search(); return false; });
 		$("div#error").click(function(){ ABROADWidget.setStatus("search"); });
 		if(window.widget) {
+			$("form#search-form select,form#search-form input[@type='text']").change(function(){
+				var k = $(this).attr("name");
+				if(k) ABROADWidget.pref.set(k,$(this).val());
+			});
+			$("form#search-form select,form#search-form input[@type='text']").each(function(){
+				$(this).val(ABROADWidget.pref.get($(this).attr("name")));
+			});
 			this.elements.scrollbar = CreateScrollArea("results", { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
 			var opts = [], act = $("select#ab-order-sel")[0].selectedIndex;
 			$("select#ab-order-sel option").each(function(i){
@@ -110,10 +117,13 @@ var ABROADWidget = {
 			request: function(i) { ABROADWidget.search(i); },
 			template : this.templates.page
 		});
-		this.setStatus("complete");
-		if($("div#cassettes").height()>$("div#results").height()) $("div#results").addClass("overflow");
-		else $("div#results").removeClass("overflow");
-		if(this.elements.scrollbar) this.elements.scrollbar.refresh();
+		$("div#results").addClass("hidden");
+		setTimeout(function(){
+			ABROADWidget.setStatus("complete");
+			if($("div#cassettes").height()>$("div#results").height()) $("div#results").addClass("overflow");
+			else $("div#results").removeClass("overflow");
+			if(ABROADWidget.elements.scrollbar) ABROADWidget.elements.scrollbar.refresh();
+		},99);
 		return true;
 	},
 	appendCassettes : function(tours) {
@@ -180,6 +190,15 @@ var ABROADWidget = {
 		ipt.val(h);
 		this.search();
 		return false;
+	},
+	pref : {
+		set : function(k,v) {
+			if(k) widget.setPreferenceForKey(v, createInstancePreferenceKey(k));
+		},
+		get : function(k) {
+			var v = k ? widget.preferenceForKey(createInstancePreferenceKey(k)) : "";
+			return v?v:"";
+		}
 	}
 }
 
