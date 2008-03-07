@@ -7,11 +7,11 @@
 	<key>AllowNetworkAccess</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
-	<string>AB-ROAD</string>
+	<string>abroad</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.ngsdev.widget.abroad</string>
 	<key>CFBundleName</key>
-	<string>AB-ROAD</string>
+	<string>abroad</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
