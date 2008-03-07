@@ -7,14 +7,32 @@ var ABROADWidget = {
 	init : function() {
 		$.each(["Dept","Places","Month","Term","Price","Order"],function(){ new ABROAD.UI[this].Pulldown(); });
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
+		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
 		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
 		$("a[@rel='set-status']").click(function(){ ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false; });
 		$("input[@type='text']").click(function(){ this.select(); })
 		$("form#search-form").submit(function(){ ABROADWidget.search(); return false; });
 		$("div#error").click(function(){ ABROADWidget.setStatus("search"); });
 		if(window.widget) {
-			this.elements.scrollbar = CreateScrollArea('results', { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
-			//CreatePopupButton('popup', { options: unescape('[%27項目 1%27%2C %27項目 2%27%2C %27項目 3%27]'), rightImageWidth: 16, leftImageWidth: 5 });
+			this.elements.scrollbar = CreateScrollArea("results", { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
+			var opts = [], act = $("select#ab-order-sel")[0].selectedIndex;
+			$("select#ab-order-sel option").each(function(i){
+				opts.push("['"+$(this).text()+"','"+$(this).val()+"'"+(i==act?",true":"")+"]");
+			});
+			opts = "["+opts.join(",")+"]";
+			$("select#ab-order-sel").remove();
+			this.elements.sortorder = CreatePopupButton("sort-order-popup", {
+				options: opts, rightImageWidth: 16, leftImageWidth: 7
+			});
+			$(this.elements.sortorder.select).change(function(e){ ABROADWidget.changeSort($(this).val()); });
+			this.elements.infobutton = CreateInfoButton('info-button', {
+				onclick : function(){ ABROADWidget.setStatus("back"); },
+				foregroundStyle: 'white', frontID: 'front', backgroundStyle: 'white'
+			});
+			this.elements.donebutton = CreateGlassButton("done-button", {
+				onclick: function(){ ABROADWidget.setStatus("front"); },
+				text: "OK"
+			});
 		} else $("body").addClass("browser");
 		//
 		$("div#page-navi p.current span.c").html("<#cp>");
@@ -44,7 +62,10 @@ var ABROADWidget = {
 	setStatus : function(i) {
 		var bool = false, reverse = false;
 		if(i=="back"&&!$("body.back").size()) reverse = "ToBack";
-		else if(i!="back"&&$("body.back").size()) reverse = "ToFront";
+		else if(i!="back"&&$("body.back").size()) {
+			reverse = "ToFront";
+			i = this._status;
+		}
 		if(window.widget&&reverse) widget.prepareForTransition(reverse);
 		$.each(["complete","error","loading","search","back"],function(){
 			if(this!=i) $("body").removeClass(this);
@@ -58,18 +79,22 @@ var ABROADWidget = {
 			case "error":
 				$("div#"+i).css("opacity","0.0");
 				$("div#"+i).animate({opacity:1},"fast");
+				$("p#info-button").addClass("hidden");
 				break;
 			case "search":
 				$("div#results").addClass("hidden");
 				$("div#search").removeClass("hidden");
+				$("p#info-button").removeClass("hidden");
 				break;
 			case "complete":
 				$("div#results").removeClass("hidden");
 				$("div#search").addClass("hidden");
+				$("p#info-button").removeClass("hidden");
 				break;
 				
 		}
 		if(window.widget&&reverse) setTimeout ("widget.performTransition();", 0);
+		if(bool&&i!="back") this._status = i;
 		return bool;
 	},
 	onLoadResults : function(d) {
@@ -148,6 +173,13 @@ var ABROADWidget = {
 			if (window.widget) widget.openURL(h);
 			else window.open(h);
 			return false;
+	},
+	changeSort : function(h) {
+		var ipt = $("form#search-form input[@name='order']");
+		if(ipt.val()==h) return false;
+		ipt.val(h);
+		this.search();
+		return false;
 	}
 }
 

@@ -8,9 +8,11 @@ legend { margin:0; padding:0; display:inline; float:left; }
 
 div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
+body.back div#back { display:block; }
+body.back div#front { display:none; }
 
-div#frame { width:412px; height:312px; background:url(Default.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
-div.content { width:392px; height:228px; position:absolute; top:49px; left:10px; overflow:hidden; }
+div#frame { width:434px; height:330px; background:url(Default.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:101; } 
+div.content { width:392px; height:228px; position:absolute; top:50px; left:21px; overflow:hidden; }
 body.browser div#results { overflow:auto; }
 
 div#results {  z-index:102; }
@@ -27,17 +29,19 @@ body.error div#error { display:block;  background-image:url(Images/overlay.png);
 body.complete div#frame div#navi-top p.hitnum,
 body.complete div#frame div#navi-bottom div#page-navi,
 body.complete div#frame div#navi-bottom p#search-button,
-body.search div#frame div#navi-bottom p#submit-button { display:block; }
+body.search div#frame div#navi-bottom p#submit-button,
+body.search div#frame div#navi-bottom p#reset-button { display:block; }
 
-div#frame div.navi { position:absolute; left:5px; width:402px; }
+div#frame div.navi { position:absolute; left:15px; width:402px; }
 div#frame div.navi p { margin:0; }
 div#frame div#navi-top { top:16px; }
+div#frame div#navi-top p#info-button { position: absolute; top: -7px; left: 385px; }
 div#frame div#navi-top p.powered { float:left; padding:0 0 0 10px; }
 div#frame div#navi-top p.powered a { width:95px; height:25px; float:left; display:block; text-indent:-9999px; overflow:hidden; }
 div#frame div#navi-top p.hitnum { float:right; padding:2px 8px 2px 5px; font-size:100%; color:#fff; display:none; }
 div#frame div#navi-top p.hitnum em { font-size:150%; font-family:"Arial Black"; margin-right:2px; }
 div#frame div#navi-bottom p.search { float:left; }
-div#frame div#navi-bottom { top:277px; color:#fff; }
+div#frame div#navi-bottom { top:279px; color:#fff; }
 div#frame div#navi-bottom div#page-navi { float:right; display:none; }
 div#frame div#navi-bottom div#page-navi p.current { float:left; font-size:85%; padding:7px 10px 0 0; }
 div#frame div#navi-bottom div#page-navi ul.page { float:left; margin:0; padding:3px 0 0 0; list-style:none; width:69px; }
@@ -54,6 +58,12 @@ div#frame div#navi-bottom p.button a:hover { background-position:0 -21px; }
 div#frame div#navi-bottom p.button a:active { background-position:0 -42px; }
 div#frame div#navi-bottom p#search-button a { background-image:url(Images/navi-search.png); }
 div#frame div#navi-bottom p#submit-button a { background-image:url(Images/navi-submit.png); }
+div#frame div#navi-bottom p#reset-button { padding-left:3px; }
+div#frame div#navi-bottom p#reset-button a { background-image:url(Images/navi-reset.png); width:63px; }
+div#frame div#navi-bottom div#sort-order-popup { text-align: left; width:115px; height:19px; float:left; position:relative; top:3px; left:3px; font-weight:bold; }
+body.search div#frame div#navi-bottom div#sort-order-popup,
+body.loading div#frame div#navi-bottom div#sort-order-popup,
+body.error div#frame div#navi-bottom div#sort-order-popup { display:none; }
 
 div#results div#content { padding:2px 0 2px 2px; }
 div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; -apple-dashboard-region:dashboard-region(control rectangle); }
@@ -98,3 +108,9 @@ div#loading p.message em { font-size:1px; text-indent:-9999px; background:url(Im
 
 div#error p.message { background:url(Images/error.png) no-repeat 0 0; margin:0; padding:0; width:190px; height:110px; position:absolute; top:59px; left:101px; }
 div#error p.message em { color:#fff; display:block; text-align:center; padding:80px 10px 0 10px; }
+
+div#back { width:434px; height:330px; background:url(Images/back.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:301; } 
+div#back p#done-button { position: absolute; left: 361px; top: 264px; margin:0; z-index:303; }
+div#back address#credits { margin:0; padding:145px 0 0 0; font-style:normal; color:#ddd; position:absolute; top:100px; left:30px; width:380px; z-index:302; background:url(Images/back-logo.png) no-repeat 50% 0; }
+div#back address#credits p { margin:0 0 5px 0; }
+div#back address#credits p a { color:#999 } 
