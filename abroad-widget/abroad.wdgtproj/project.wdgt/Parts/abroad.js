@@ -13,14 +13,14 @@ var ABROADWidget = {
 		$("input[@type='text']").click(function(){ this.select(); })
 		$("form#search-form").submit(function(){ ABROADWidget.search(); return false; });
 		$("div#error").click(function(){ ABROADWidget.setStatus("search"); });
+		$("form#search-form select,form#search-form input[@type='text']").change(function(){
+			var k = $(this).attr("name");
+			if(k) ABROADWidget.pref.set(k,$(this).val());
+		});
+		$("form#search-form select,form#search-form input[@type='text']").each(function(){
+			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
+		});
 		if(window.widget) {
-			$("form#search-form select,form#search-form input[@type='text']").change(function(){
-				var k = $(this).attr("name");
-				if(k) ABROADWidget.pref.set(k,$(this).val());
-			});
-			$("form#search-form select,form#search-form input[@type='text']").each(function(){
-				$(this).val(ABROADWidget.pref.get($(this).attr("name")));
-			});
 			this.elements.scrollbar = CreateScrollArea("results", { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
 			var opts = [], act = $("select#ab-order-sel")[0].selectedIndex;
 			$("select#ab-order-sel option").each(function(i){
@@ -193,9 +193,10 @@ var ABROADWidget = {
 	},
 	pref : {
 		set : function(k,v) {
-			if(k) widget.setPreferenceForKey(v, createInstancePreferenceKey(k));
+			if(k&&window.widget) widget.setPreferenceForKey(v, createInstancePreferenceKey(k));
 		},
 		get : function(k) {
+			if(!window.widget) return "";
 			var v = k ? widget.preferenceForKey(createInstancePreferenceKey(k)) : "";
 			return v?v:"";
 		}
