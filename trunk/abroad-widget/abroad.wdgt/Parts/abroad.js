@@ -25,7 +25,7 @@ var ABROADWidget = {
 			city : { val:gv("city"), first_opt_text:getLocalizedString("select_city") }
 		});
 		this.elements.pulldown = pd;
-		$("form#search-form input[@type='text']").each(function(){
+		$("form#search-form input").each(function(){
 			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
 		});
 		this.elements.searchform = { input : $("form#search-form select,form#search-form input[@type='text']") };
@@ -145,10 +145,11 @@ var ABROADWidget = {
 		});
 		var sa = this.elements.scrollarea;
 		var sb = this.elements.scrollbar;
-		sa.verticalScrollTo(0);
 		this.setStatus("complete");
-		if(sa) sa.refresh();
-		alert(sb.hidden)
+		if(sa) {
+			sa.refresh();
+			sa.verticalScrollTo(0);
+		}
 		if((sb&&!sb.hidden)||$("div#cassettes").height()>$("div#results").height())
 			$("div#results").addClass("overflow");
 		else
@@ -210,9 +211,9 @@ var ABROADWidget = {
 		return true;
 	},
 	getURL : function(h) {
-			if (window.widget) widget.openURL(h);
-			else window.open(h);
-			return false;
+		if (window.widget) widget.openURL(h);
+		else window.open(h);
+		return false;
 	},
 	changeSort : function(h) {
 		var ipt = $("form#search-form input[@name='order']");
