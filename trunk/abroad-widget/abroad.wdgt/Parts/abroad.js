@@ -232,7 +232,7 @@ var ABROADWidget = {
 			return v?v:"";
 		},
 		remember : function() {
-			var ipt = this.elements.searchform.input;
+			var ipt = ABROADWidget.elements.searchform.input;
 			setTimeout(function(){
 				ipt.each(function(){
 					var k = $(this).attr("name");
