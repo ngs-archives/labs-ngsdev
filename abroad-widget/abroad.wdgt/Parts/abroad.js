@@ -9,6 +9,7 @@ var ABROADWidget = {
 		var pd = {};
 		$.each(["Dept","Month","Order"],function(){
 			var i = this.toLowerCase();
+			if(i=="month") i="ym";
 			pd[i] = new ABROAD.UI[this].Pulldown({ val:gv(i) });
 		});
 		$.each(["Term","Price"],function(){
