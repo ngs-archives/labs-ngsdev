@@ -33,7 +33,6 @@ var ABROADWidget = {
 			if(k) ABROADWidget.pref.set(k,$(this).val());
 		});
 		var dsel_pfx = "form#search-form fieldset.destination select";
-		$(dsel_pfx).unbind("change");
 		$(dsel_pfx).change(function(){
 			ABROADWidget.pref.set("area",$(dsel_pfx+"[@name='area']").val());
 			ABROADWidget.pref.set("country",$(dsel_pfx+"[@name='country']").val());
