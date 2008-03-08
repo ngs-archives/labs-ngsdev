@@ -28,17 +28,15 @@ var ABROADWidget = {
 		$("form#search-form input[@type='text']").each(function(){
 			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
 		});
-		var ipt = $("form#search-form select,form#search-form input[@type='text']");
-		ipt.change(function(){
-			setTimeout(function(){
-				ipt.each(function(){
-					var k = $(this).attr("name");
-					if(k) ABROADWidget.pref.set(k,$(this).val());
-				})
-			},99);
+		this.elements.searchform = { input : $("form#search-form select,form#search-form input[@type='text']") };
+		this.elements.searchform.input.change(function(){
+			ABROADWidget.pref.remember();
 		});
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
-		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
+		$("a[@rel='reset']").click(function(){
+			$("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false;
+			ABROADWidget.pref.remember();
+		});
 		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
 		$("a[@rel='set-status']").click(function(){ ABROADWidget.setStatus($(this).attr("href").split("#").pop()); return false; });
 		$("input[@type='text']").click(function(){ this.select(); })
@@ -232,6 +230,15 @@ var ABROADWidget = {
 			if(!window.widget) return "";
 			var v = k ? widget.preferenceForKey(createInstancePreferenceKey(k)) : "";
 			return v?v:"";
+		},
+		remember : function() {
+			var ipt = this.elements.searchform.input;
+			setTimeout(function(){
+				ipt.each(function(){
+					var k = $(this).attr("name");
+					if(k) ABROADWidget.pref.set(k,$(this).val());
+				})
+			},99);
 		}
 	}
 }
