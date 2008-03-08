@@ -28,17 +28,13 @@ var ABROADWidget = {
 		$("form#search-form input[@type='text']").each(function(){
 			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
 		});
-		$("form#search-form select,form#search-form input[@type='text']").change(function(){
-			var k = $(this).attr("name");
-			if(k) ABROADWidget.pref.set(k,$(this).val());
+		var ipt = $("form#search-form select,form#search-form input[@type='text']");
+		ipt.change(function(){
+			ipt.each(function(){
+				var k = $(this).attr("name");
+				if(k) ABROADWidget.pref.set(k,$(this).val());
+			})
 		});
-		var dsel_pfx = "form#search-form fieldset.destination select";
-		$(dsel_pfx).change(function(){
-			ABROADWidget.pref.set("area",$(dsel_pfx+"[@name='area']").val());
-			ABROADWidget.pref.set("country",$(dsel_pfx+"[@name='country']").val());
-			ABROADWidget.pref.set("city",$(dsel_pfx+"[@name='city']").val());
-		});
-		
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
 		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
 		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
