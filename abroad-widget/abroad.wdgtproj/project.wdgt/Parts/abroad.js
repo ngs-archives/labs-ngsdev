@@ -30,10 +30,12 @@ var ABROADWidget = {
 		});
 		var ipt = $("form#search-form select,form#search-form input[@type='text']");
 		ipt.change(function(){
-			ipt.each(function(){
-				var k = $(this).attr("name");
-				if(k) ABROADWidget.pref.set(k,$(this).val());
-			})
+			setTimeout(function(){
+				ipt.each(function(){
+					var k = $(this).attr("name");
+					if(k) ABROADWidget.pref.set(k,$(this).val());
+				})
+			},99);
 		});
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
 		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
