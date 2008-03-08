@@ -5,7 +5,32 @@ var ABROADWidget = {
 	templates : {},
 	elements : {},
 	init : function() {
-		$.each(["Dept","Places","Month","Term","Price","Order"],function(){ new ABROAD.UI[this].Pulldown(); });
+		var gv = function(i) { return ABROADWidget.pref.get(i); }
+		var pd = {};
+		$.each(["Dept","Month","Order"],function(){
+			var i = this.toLowerCase();
+			pd[i] = new ABROAD.UI[this].Pulldown({ val:gv(i) });
+		});
+		$.each(["Term","Price"],function(){
+			var i = this.toLowerCase();
+			pd[i] = new ABROAD.UI[this].Pulldown({
+				min : { val:gv(i+"_min") },
+				max : { val:gv(i+"_max") }
+			});
+		});
+		pd.places = new ABROAD.UI.Places.Pulldown({
+			area : { val:gv("area"), first_opt_text:getLocalizedString("select_area") },
+			country : { val:gv("country"), first_opt_text:getLocalizedString("select_country") },
+			city : { val:gv("city"), first_opt_text:getLocalizedString("select_city") }
+		});
+		this.elements.pulldown = pd;
+		$("form#search-form input[@type='text']").each(function(){
+			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
+		});
+		$("form#search-form select,form#search-form input[@type='text']").change(function(){
+			var k = $(this).attr("name");
+			if(k) ABROADWidget.pref.set(k,$(this).val());
+		});
 		$("a[@rel='submit']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).trigger("submit"); return false; });
 		$("a[@rel='reset']").click(function(){ $("form#"+$(this).attr("href").split("#").pop()).each(function(){ this.reset(); }); return false; });
 		$("a[@rel='external']").click(function(){ return ABROADWidget.getURL($(this).attr("href")); });
@@ -13,15 +38,12 @@ var ABROADWidget = {
 		$("input[@type='text']").click(function(){ this.select(); })
 		$("form#search-form").submit(function(){ ABROADWidget.search(); return false; });
 		$("div#error").click(function(){ ABROADWidget.setStatus("search"); });
-		$("form#search-form select,form#search-form input[@type='text']").change(function(){
-			var k = $(this).attr("name");
-			if(k) ABROADWidget.pref.set(k,$(this).val());
-		});
-		$("form#search-form select,form#search-form input[@type='text']").each(function(){
-			$(this).val(ABROADWidget.pref.get($(this).attr("name")));
-		});
 		if(window.widget) {
-			this.elements.scrollbar = CreateScrollArea("results", { hasVerticalScrollbar: true, scrollbarDivSize: 15, autoHideScrollbars: true, scrollbarMargin: 2, spacing: 4 });
+			this.elements.scrollarea = CreateScrollArea("results", {
+				hasVerticalScrollbar:true, scrollbarDivSize:15,
+				autoHideScrollbars:true, scrollbarMargin:2, spacing:4
+			});
+			this.elements.scrollbar = this.elements.scrollarea._scrollbars[0];
 			var opts = [], act = $("select#ab-order-sel")[0].selectedIndex;
 			$("select#ab-order-sel option").each(function(i){
 				opts.push("['"+$(this).text()+"','"+$(this).val()+"'"+(i==act?",true":"")+"]");
@@ -34,7 +56,7 @@ var ABROADWidget = {
 			$(this.elements.sortorder.select).change(function(e){ ABROADWidget.changeSort($(this).val()); });
 			this.elements.infobutton = CreateInfoButton('info-button', {
 				onclick : function(){ ABROADWidget.setStatus("back"); },
-				foregroundStyle: 'white', frontID: 'front', backgroundStyle: 'white'
+				foregroundStyle:"white", frontID:"front", backgroundStyle:"white"
 			});
 			this.elements.donebutton = CreateGlassButton("done-button", {
 				onclick: function(){ ABROADWidget.setStatus("front"); },
@@ -51,7 +73,7 @@ var ABROADWidget = {
 		this.setStatus("search");
 	},
 	error : function(msg) {
-		msg = msg ?msg: "不明なエラー";
+		msg = msg ?msg: getLocalizedString("error_unknown");
 		$("div#error p.message").html("<em>"+msg+"<\/em>");
 		this.setStatus("error");
 		return false;
@@ -117,17 +139,20 @@ var ABROADWidget = {
 			request: function(i) { ABROADWidget.search(i); },
 			template : this.templates.page
 		});
-		$("div#results").addClass("hidden");
-		setTimeout(function(){
-			ABROADWidget.setStatus("complete");
-			if($("div#cassettes").height()>$("div#results").height()) $("div#results").addClass("overflow");
-			else $("div#results").removeClass("overflow");
-			if(ABROADWidget.elements.scrollbar) ABROADWidget.elements.scrollbar.refresh();
-		},99);
+		var sa = this.elements.scrollarea;
+		var sb = this.elements.scrollbar;
+		sa.verticalScrollTo(0);
+		this.setStatus("complete");
+		if(sa) sa.refresh();
+		alert(sb.hidden)
+		if((sb&&!sb.hidden)||$("div#cassettes").height()>$("div#results").height())
+			$("div#results").addClass("overflow");
+		else
+			$("div#results").removeClass("overflow");
 		return true;
 	},
 	appendCassettes : function(tours) {
-		if(!tours||!tours.length) return this.error("検索結果が1件もありません");
+		if(!tours||!tours.length) return this.error(getLocalizedString("error_noresult"));
 		var ht = "";
 		var tmpl = this.templates.cassette;
 		function fmturi(s,d) {
@@ -173,6 +198,7 @@ var ABROADWidget = {
 			if(this.price.min==this.price.max) $("p.price span.min,p.price span.glue",cas).remove();
 			cassettes.append(cas);
 		});
+		cassettes.append("<div class=\"dummy\"><\/div>");
 		$("div#content").append(cassettes);
 		$("div#cassettes div.cassette").click(function(){
 			return ABROADWidget.getURL($("h2 a",this).attr("href"));
