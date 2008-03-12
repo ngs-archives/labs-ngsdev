@@ -69,6 +69,7 @@ div#results div#content { padding:2px 0 2px 2px; }
 div#results div#content div.cassette { border-bottom:1px solid #9c9c9c; width:388px; background:url(Images/cas-top.png) no-repeat 0 0; margin:0 0 3px 0; cursor:pointer; -apple-dashboard-region:dashboard-region(control rectangle); }
 div#results div#content div.cassette h2 { margin:0; width:100%; font-size:110%; }
 div#results div#content div.cassette h2 a { display:block; color:#666; padding:8px; text-decoration:none; line-height:150%; }
+div#results div#content div.cassette h2 a img { width:1px; height:1px; border:0; position:absolute; left:-9999px; top:-9999px; }
 div#results div#content div.cassette div.info { background:url(Images/cas-bottom.png) no-repeat 0 0; padding:0 0 5px 0; }
 div#results div#content div.cassette div.info p { margin:0; }
 div#results div#content div.cassette div.info p.cities { color:#258ea4; padding:5px; }
