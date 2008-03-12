@@ -4,6 +4,8 @@ var ABROADWidget = {
 	results : false,
 	templates : {},
 	elements : {},
+	update : null,
+	version : "1.0.1",
 	init : function() {
 		var gv = function(i) { return ABROADWidget.pref.get(i); }
 		var pd = {};
@@ -74,7 +76,34 @@ var ABROADWidget = {
 		this.templates.cassette = $("#cassette-template").html().replace(/\t|\n/g,"");
 		$("#cassette-template").remove();
 		$("div#page-navi").empty();
-		this.setStatus("search");
+		if(this.checkUpdate()) return this.confirmUpdate();
+		else return this.setStatus("search");
+	},
+	checkUpdate : function() {
+		var cversion = this.version.split(".").join("");
+		if(cversion.length<=2) cversion = cversion+"0";
+		cversion = parseInt(cversion);
+		var uversion = this.update&&this.update.version?this.update.version.split(".").join(""):"";
+		if(uversion.length<=2) uversion = uversion+"0";
+		uversion = parseInt(uversion);
+		return uversion>cversion;
+	},
+	confirmUpdate : function(){
+		this.confirm(getLocalizedString("confirm_update"),function(){
+			ABROADWidget.getURL(ABROADWidget.update.download);
+			ABROADWidget.setStatus("search");
+		});
+	},
+	confirm : function(msg,callback_yes,callback_no) {
+		callback_yes = callback_yes ? callback_yes : function() { return false; }
+		callback_no = callback_no ? callback_no : function() { ABROADWidget.setStatus("search"); return false; }
+		$("#confirm ul.buttons li a").unbind("click");
+		$("#confirm ul.buttons li.yes a").click(callback_yes);
+		$("#confirm ul.buttons li.no a").click(callback_no);
+		msg = msg ? msg : "";
+		$("div#error p.message").html("<em>"+msg+"<\/em>");
+		this.setStatus("confirm");
+		return false;
 	},
 	error : function(msg) {
 		msg = msg ?msg: getLocalizedString("error_unknown");
@@ -100,7 +129,7 @@ var ABROADWidget = {
 			i = this._status;
 		}
 		if(window.widget&&reverse) widget.prepareForTransition(reverse);
-		$.each(["complete","error","loading","search","back"],function(){
+		$.each(["complete","confirm","error","loading","search","back"],function(){
 			if(this!=i) $("body").removeClass(this);
 			else {
 				$("body").addClass(this);
@@ -110,6 +139,7 @@ var ABROADWidget = {
 		switch(i) {
 			case "loading":
 			case "error":
+			case "confirm":
 				$("div#"+i).css("opacity","0.0");
 				$("div#"+i).animate({opacity:1},"fast");
 				$("p#info-button").addClass("hidden");
