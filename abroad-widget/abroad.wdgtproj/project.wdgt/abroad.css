@@ -5,7 +5,7 @@ legend { margin:0; padding:0; display:inline; float:left; }
 .dummy { height:1px; width:100%; clear:both; overflow:hidden; visibility:hidden; }
 .dummy hr { margin:0; height:1px; }
 .hidden { display:none; }
-
+img { border:0; }
 div#front { position:relative; top:0; left:0; }
 div#back { display:none; }
 body.back div#back { display:block; }
@@ -112,6 +112,8 @@ div#error p.message em { color:#fff; display:block; text-align:center; padding:8
 
 div#back { width:434px; height:330px; background:url(Images/back.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:301; } 
 div#back p#done-button { position: absolute; left: 361px; top: 264px; margin:0; z-index:303; }
-div#back address#credits { margin:0; padding:145px 0 0 0; font-style:normal; color:#ddd; position:absolute; top:100px; left:30px; width:380px; z-index:302; background:url(Images/back-logo.png) no-repeat 50% 0; }
+div#back address#credits { margin:0; padding:120px 0 0 0; font-style:normal; color:#ddd; position:absolute; top:100px; left:30px; width:380px; z-index:302; background:url(Images/back-logo.png) no-repeat 50% 0; }
 div#back address#credits p { margin:0 0 5px 0; }
-div#back address#credits p a { color:#999 } 
+div#back address#credits p a { color:#999 }
+div#back address#credits p.banner a,
+div#back address#credits p.banner a img { display:block; width:135px; height:17px; } 
