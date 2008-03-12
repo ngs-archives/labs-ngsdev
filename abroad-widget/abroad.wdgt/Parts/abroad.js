@@ -191,7 +191,7 @@ var ABROADWidget = {
 		var ht = "";
 		var tmpl = this.templates.cassette;
 		var d_month = $("div#search select[@name='ym']").val()
-		d_month = d_month&&d_month.length==6?d_month.substr(-2):"";
+		d_month = d_month&&d_month.length==6?parseInt(d_month.substr(-2)):"";
 		function fmturi(s,d) {
 			var q = s.split("?").pop().split("&"), p = "", o = {};
 			$.each(q,function(){
