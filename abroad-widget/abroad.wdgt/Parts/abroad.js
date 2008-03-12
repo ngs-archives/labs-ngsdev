@@ -173,7 +173,10 @@ var ABROADWidget = {
 				case "NGO": d = "NGO"; break;
 				default : d = "999"; break;
 			}
-			return "http:\/\/www.ab-road.net\/tour\/detail\/"+d+"\/"+o.tourcode+"\/s01rWG\/"+p;
+			var u = "http:\/\/www.ab-road.net\/tour\/detail\/"+d+"\/"+o.tourcode+"\/s01rWG\/"+p+"?vos=nabrvccp07110201";
+			u = encodeURIComponent(u);
+			u = "http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2462325&pid=876781123&vc_url="+u;
+			return u;
 		}
 		function fmtnum(x) {
 			var s = "" + x;
@@ -201,6 +204,7 @@ var ABROADWidget = {
 			t = t.replace(/#cassette-template/,l);
 			var cas = $(t);
 			if(this.price.min==this.price.max) $("p.price span.min,p.price span.glue",cas).remove();
+			$("a",cas).append("<img src=\"http:\/\/ad.jp.ap.valuecommerce.com\/servlet\/gifbanner?sid=2462325&pid=876781123\" class=\"beacon\" \/>")
 			cassettes.append(cas);
 		});
 		cassettes.append("<div class=\"dummy\"><\/div>");
