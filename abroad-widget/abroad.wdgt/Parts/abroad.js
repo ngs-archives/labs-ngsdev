@@ -190,6 +190,8 @@ var ABROADWidget = {
 		if(!tours||!tours.length) return this.error(getLocalizedString("error_noresult"));
 		var ht = "";
 		var tmpl = this.templates.cassette;
+		var d_month = $("div#search select[@name='ym']").val()
+		d_month = d_month&&d_month.length==6?d_month.substr(-2):"";
 		function fmturi(s,d) {
 			var q = s.split("?").pop().split("&"), p = "", o = {};
 			$.each(q,function(){
@@ -197,6 +199,7 @@ var ABROADWidget = {
 				o[a[0]] = a[1];
 				if(!a[0].match(/tourcode|vos|site_code|root_type/))	p+=a[0]+"-"+a[1]+"\/";
 			});
+			if(!o.d_month&&d_month) p += "d_month-"+d_month+"\/";
 			switch(d) {
 				case "NRT": case "HND": case "TYO": d = "TYO"; break;
 				case "OSA": case "ITM": case "KIX": d = "OSA"; break;
