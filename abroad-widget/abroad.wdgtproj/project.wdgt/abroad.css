@@ -19,12 +19,14 @@ div#results {  z-index:102; }
 div#search {  z-index:103; }
 div#loading { z-index:201; display:none; }
 div#error { z-index:202; display:none; }
+div#confirm { z-index:203; display:none; }
 
 body.search div#results,
 body.complete div#search { display:none; }
 
 body.loading div#loading,
-body.error div#error { display:block;  background-image:url(Images/overlay.png); }
+body.error div#error,
+body.confirm div#confirm { display:block;  background-image:url(Images/overlay.png); }
 
 body.complete div#frame div#navi-top p.hitnum,
 body.complete div#frame div#navi-bottom div#page-navi,
