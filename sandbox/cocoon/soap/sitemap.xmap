@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+  <map:pipelines>
+    <map:pipeline>
+      <map:match pattern="*">
+        <map:generate src="xscript/{1}.xsp" type="serverpages"/>
+        <map:transform src="stylesheets/{1}.xsl" />
+        <map:serialize/>
+      </map:match>
+    </map:pipeline>
+  </map:pipelines>
+</map:sitemap>
