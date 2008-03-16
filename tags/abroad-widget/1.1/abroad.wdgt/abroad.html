@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" id="abroad-widget">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta name="generator" content="Dashcode">
+	<link rev="made" title="atsushi nagase" href="http://ngsdev.org/">
+	<link rel="stylesheet" type="text/css" media="all" href="abroad.css">
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleAnimator.js" charset="utf-8"></script>
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollbar.js" charset="utf-8"></script> 
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
+    <script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/ScrollArea.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/PopupButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/InfoButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/GlassButton.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/jquery.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/jquery.form.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/recruit.ui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/abroad.ui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/scriptrunner.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Parts/abroad.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://widgets.ngsdev.org/info/abroad-widget.js" charset="utf-8"></script>
+	<title>エイビーロード ツアー検索</title>
+</head>
+<body class="search">
+<div id="front">
+	<!-- frame ==================================== -->
+	<div id="frame">
+		<div class="navi" id="navi-top">
+			<p class="powered"><a href="http://www.ab-road.net/" rel="external" title="Powered by AB-ROAD">Powered by AB-ROAD</a></p>
+			<p class="hitnum"><em></em>ツアーが見つかりました</p>
+			<p class="apple-no-children" id="info-button" apple-part="com.apple.Dashcode.part.infobutton" apple-default-image-visibility="hidden"></p>
+		</div>
+		<div class="navi" id="navi-bottom">
+			<p class="search button" id="search-button"><a href="#search" rel="set-status" title="再検索">再検索</a></p>
+			<p class="submit button" id="submit-button"><a href="#search-form" rel="submit">検索</a></p>
+			<p class="reset button" id="reset-button"><a href="#search-form" rel="reset">リセット</a></p>
+			<div id="sort-order-popup" apple-group="sort-order-popup" apple-part="com.apple.Dashcode.part.lozengepopupbutton"></div>
+			<div id="page-navi">
+				<p class="current"><span class="c"></span>/全<span class="t"></span>ページ</p>
+				<ul class="page">
+					<li class="prev rui-page-back"><a href="#loading">前</a></li>
+					<li class="next rui-page-next"><a href="#loading">次</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- results ==================================== -->
+	<div id="results" apple-part="com.apple.Dashcode.part.scrollarea" apple-group="searchSesult" class="content">
+		<div id="content" apple-group="searchSesult">
+			<div id="cassette-template" class="cassette">
+				<h2><a href="#cassette-template" title="__title__">__title__</a></h2>
+				<div class="info">
+					<p class="cities">__city_summary__</p>
+					<p class="term round"><em>__term__</em>日間</p>
+					<p class="price round">
+						<span class="min"><em>__price_min__</em>万</span>
+						<span class="glue">&#65374;</span>
+						<span class="max"><em>__price_max__</em>万</span>
+						<span class="unit">円</span>
+					</p>
+					<div class="dummy"><hr /></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- loading ==================================== -->
+	<div id="loading" class="content">
+		<p class="message"><em>読み込み中</em></p>
+	</div>
+	<!-- confirm ==================================== -->
+	<div id="confirm" class="content">
+		<div class="inner">
+			<p class="message"><em></em></p>
+			<ul class="buttons">
+				<li class="yes"><a href="#confirm">はい</a></li>
+				<li class="no"><a href="#confirm">いいえ</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- error ==================================== -->
+	<div id="error" class="content">
+		<p class="message"><em></em></p>
+	</div>
+	<!-- search ==================================== -->
+	<div id="search" class="content">
+		<form id="search-form">
+			<h2>ご希望のツアー条件を選択し、左下の検索ボタンを押してください。</h2>
+			<fieldset class="dept">
+				<p class="dept">
+					<label for="ab-dept-sel">出発地</label>
+					<select id="ab-dept-sel" name="dept"></select>
+				</p>
+				<p class="month">
+					<label for="ab-month-sel">出発月</label>
+					<select id="ab-month-sel" name="ym"></select>
+				</p>
+			</fieldset>
+			<fieldset class="destination">
+				<legend><label for="ab-area-sel">目的地</label></legend>
+				<p class="ele">
+					<select id="ab-area-sel" name="area"></select>
+					<select id="ab-country-sel" name="country"></select>
+					<select id="ab-city-sel" name="city"></select>
+				</p>
+			</fieldset>
+			<fieldset class="term two">
+				<legend><label for="ab-term-min-sel">期　間</label></legend>
+				<p class="ele">
+					<select id="ab-term-min-sel" name="term_min"></select>
+					<span class="spl">&#65374;</span>
+					<select id="ab-term-max-sel" name="term_max"></select>
+				</p>
+			</fieldset>
+			<fieldset class="price two">
+				<legend><label for="ab-price-min-sel">価　格</label></legend>
+				<p class="ele">
+					<select id="ab-price-min-sel" name="price_min"></select>
+					<span class="spl">&#65374;</span>
+					<select id="ab-price-max-sel" name="price_max"></select>
+				</p>
+			</fieldset>
+			<fieldset class="keyword">
+				<legend><label for="ab-keyword-ipt">キーワード</label></legend>
+				<p class="ele"><input type="text" name="keyword" id="ab-keyword-ipt" /></p>
+			</fieldset>
+			<fieldset class="hidden">
+				<select id="ab-order-sel"></select>
+				<input type="hidden" name="count" value="10" />
+				<input type="hidden" name="order" value="" />
+			</fieldset>
+		</form>
+	</div>
+</div>
+<div id="back">
+	<p id="done-button" class="apple-no-children" apple-part="com.apple.Dashcode.part.glassbutton"></p>
+	<address id="credits">
+		<p>Powered by <em><a href="http://www.ab-road.net/" rel="external">AB-ROAD</a></em>.</p>
+		<p>Using libraries
+			<em><a href="http://mtl.recruit.co.jp/sandbox/rui/" rel="external">Recruit WebService UI Library</a></em>,
+			<em><a href="http://jquery.com/" rel="external">jQuery</a></em>
+		.</p>
+		<p>&copy;+code+design 2008 <em><a href="http://ngsdev.org/" rel="external">atsushi nagase</a></em>.</p>
+		<p class="banner"><a href="http://webservice.recruit.co.jp" rel="external"><img src="http://webservice.recruit.co.jp/banner/abroad-s.gif" alt="エイビーロードWebサービス" width="135" height="17" title="エイビーロードWebサービス" /></a></p>
+	</address>
+</div>
+</body>
+</html>
