@@ -101,7 +101,7 @@ var ABROADWidget = {
 		$("#confirm ul.buttons li.yes a").click(callback_yes);
 		$("#confirm ul.buttons li.no a").click(callback_no);
 		msg = msg ? msg : "";
-		$("div#error p.message").html("<em>"+msg+"<\/em>");
+		$("div#confirm p.message").html("<em>"+msg+"<\/em>");
 		this.setStatus("confirm");
 		return false;
 	},
