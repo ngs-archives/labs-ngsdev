@@ -21,6 +21,8 @@ var ABROADWidget = {
 				max : { val:gv(i+"_max") }
 			});
 		});
+		$("a[@href='http://www.ab-road.net/']").append(this.getBeacon());
+		$("a[@href='http://www.ab-road.net/']").attr("href",this.vcURL("http:\/\/www.ab-road.net\/"));
 		pd.places = new ABROAD.UI.Places.Pulldown({
 			area : { val:gv("area"), first_opt_text:getLocalizedString("select_area") },
 			country : { val:gv("country"), first_opt_text:getLocalizedString("select_country") },
@@ -206,10 +208,7 @@ var ABROADWidget = {
 				case "NGO": d = "NGO"; break;
 				default : d = "999"; break;
 			}
-			var u = "http:\/\/www.ab-road.net\/tour\/detail\/"+d+"\/"+o.tourcode+"\/s01rWG\/"+p+"?vos=nabrvccp07110201";
-			u = encodeURIComponent(u);
-			u = "http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2462325&pid=876781123&vc_url="+u;
-			return u;
+			return ABROADWidget.vcURL("http:\/\/www.ab-road.net\/tour\/detail\/"+d+"\/"+o.tourcode+"\/s01rWG\/"+p+"?vos=nabrvccp07110201");
 		}
 		function fmtnum(x) {
 			var s = "" + x;
@@ -237,7 +236,7 @@ var ABROADWidget = {
 			t = t.replace(/#cassette-template/,l);
 			var cas = $(t);
 			if(this.price.min==this.price.max) $("p.price span.min,p.price span.glue",cas).remove();
-			$("a",cas).append("<img src=\"http:\/\/ad.jp.ap.valuecommerce.com\/servlet\/gifbanner?sid=2462325&pid=876781123\" class=\"beacon\" \/>")
+			$("a",cas).append(ABROADWidget.getBeacon());
 			cassettes.append(cas);
 		});
 		cassettes.append("<div class=\"dummy\"><\/div>");
@@ -278,6 +277,12 @@ var ABROADWidget = {
 				})
 			},99);
 		}
+	},
+	getBeacon : function() {
+		return "<img src=\"http:\/\/ad.jp.ap.valuecommerce.com\/servlet\/gifbanner?sid=2462325&pid=876800001\" class=\"beacon\" style=\"position:absolute; top:-9999px; left:-9999px;\" \/>";
+	},
+	vcURL : function(u) {
+		return "http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2462325&pid=876800001&vc_url="+encodeURIComponent(u);
 	}
 }
 
