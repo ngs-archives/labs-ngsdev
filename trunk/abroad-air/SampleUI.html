@@ -1,0 +1,45 @@
+<html>
+    <head>
+		<script type="text/javascript">
+		    // developer function implemented in the browser sandbox.
+		    function forApplicationSandbox() {
+		        return "This is from the remote sandbox.";
+		    }
+		    
+		    function doLoad() {
+		        // Expose this function for the application sandbox 
+		        // by writing to window.childSandboxBridge.
+		        childSandboxBridge = {'callMe': forApplicationSandbox};
+		    }
+		</script>
+    </head>
+    
+	<body onload="doLoad()">
+	    <h3>Remote Sandbox Content</h3>
+	    
+	    <ul>
+            <li>
+                Behaves like content in a network sandbox in browser:
+                <ul>
+                    <li>
+                        Can make calls to eval()
+                    </li>
+                    <li>
+                        Can load remote JavaScript Files
+                    </li>
+                </ul>
+            </li>
+
+	        <li>Does <em>not</em> have access to AIR APIs</li>
+
+	        <li>Can call functions from the aplication sandbox exposed by the developer 
+	        	via the sandbox bridge:
+	        
+	            <br/> <input type="button" onclick="alert(parentSandboxBridge.readLocalFile())" value="Call the exposed function for reading a local file"/>
+	        </li>
+
+	        <li>Can expose functions to the application sandbox via the sandbox bridge.</li>
+	    </ul>
+	
+	</body>
+</html>
