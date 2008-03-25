@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CYProjectFormatVersion</key>
+	<integer>1</integer>
+	<key>UseCustomDefaultImage</key>
+	<true/>
+	<key>UseCustomWidgetIcon</key>
+	<true/>
+	<key>WidgetIconImageSettings</key>
+	<string>image-theme: 0; image-shape: 0; image-opacity: 1.00; image-top-color: 0.6700,0.6700,0.6700; image-bottom-color: 0.6700,0.6700,0.6700; image-border-color: 0.6700,0.6700,0.6700; shadow-include-shadow: 1; shadow-blur: 9.00; shadow-offset: -1.00,-6.00; shadow-color: 0.0000,0.0000,0.0000,0.3333;</string>
+</dict>
+</plist>
