@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsp:page
+  language="java"
+	xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+	xmlns:xsp="http://apache.org/xsp"
+	xmlns:xsp-request="http://apache.org/xsp/request/2.0"
+	xmlns:xscript="http://apache.org/xsp/xscript/1.0"
+	xmlns:soap="http://apache.org/xsp/soap/3.0"
+  >
+ 
+<search-results>
+	<xsp:logic>
+        String SearchIndex = request.getParameter("search");
+        String Keywords = request.getParameter("keywords");
+	</xsp:logic>
+    <param>
+    	<search><xsp-request:get-parameter name="search"/></search>
+    	<keywords><xsp-request:get-parameter name="keywords"/></keywords>
+    </param>
+    <result>
+		<xsp:logic>
+        if (!(SearchIndex == null || SearchIndex.equals("") || Keywords == null || Keywords.equals(""))) {
+			<soap:call url="https://soap.amazon.co.jp/onca/soap?Service=AWSECommerceService"
+				xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance"
+				xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+				<namesp1:ItemSearch xmlns:namesp1="urn:PI/DevCentral/SoapService">
+					<AWSAccessKeyId>1SCHFQXQXSHAE71A5S82</AWSAccessKeyId>
+					<SearchIndex><xsp-request:get-parameter name="search"/></SearchIndex>
+					<Keywords><xsp-request:get-parameter name="keywords"/></Keywords>
+				</namesp1:ItemSearch>
+			</soap:call>
+        }
+		</xsp:logic>
+    </result>
+</search-results>
+</xsp:page>
