@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="abroad">
+  </ModulePrefs>
+  <Content type="html">
+  <![CDATA[
+<script type="text/javascript" src="http://www.ab-road.net/doc/blogparts2/ab-blogparts.js"></script><script type="text/javascript">_emb("p_area=EUR&p_country=DE&p_city=BER&p_fw=&p_kodawari=1&p_order=-1&p_frm_clr=b20f13&p_ph_url=http%3A%2F%2Fwww.ab-road.net%2Fdoc%2Fblogparts2%2Fpict%2Fafrica1.jpg&p_ph_cmt=&p_kodawari=1");</script>
+  ]]>
+  </Content>
+</Module>

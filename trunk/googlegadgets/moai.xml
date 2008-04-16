@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="モアイ飛ばし">
+  </ModulePrefs>
+  <Content type="html">
+  <![CDATA[
+
+    <script type="text/javascript" src="http://www.ab-road.net/doc/blogparts/moai.js"></script>
+    <script type="text/javascript">setFlash("#ffffff");</script>
+
+  ]]>
+  </Content>
+</Module>

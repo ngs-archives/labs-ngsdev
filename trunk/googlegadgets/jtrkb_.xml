@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="sitescouter">
+  </ModulePrefs>
+  <Content type="html">
+  <![CDATA[
+
+  <script type="text/javascript">
+  <!--
+    var d = window.top.document;
+    if(d) {
+      var div = document.getElementsByTagName("div"), sidebar;
+      for(var i=0;i<div.length;i++) {
+        if(div[i].getAttribute("class") == "sidebar") {
+          sidebar = div[i];
+         break;
+        }
+      }
+      if(!sidebar) sidebar = div[0];
+      var ele = d.createElement("div");
+      ele.setAttribute("class", "hatena-module");
+      
+      ele.innerHTML = "<scr" + "ipt type=\"text\/javascript\" src=\"http:\/\/www.tkrb.jp\/modules\/mylinks\/sscouter.js\"><\/script>"
+        + "<script type=\"text\/javascript\">"
+        + "SiteScouter.show(\"15\", \"#ffffff\", 0);"
+        + "<\/scr" + "ipt>";
+      
+      sidebar.appendChild(ele);
+    }
+  //-->
+  </script>
+  ]]>
+  </Content>
+</Module>
